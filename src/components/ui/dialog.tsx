@@ -1,22 +1,23 @@
-import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
-import { X } from "lucide-react";
+import * as React from "react"
+
+import { cva, type VariantProps } from "class-variance-authority"
+import { X } from "lucide-react"
 import {
   Button as AriaButton,
   Dialog as AriaDialog,
-  type DialogProps as AriaDialogProps,
   DialogTrigger as AriaDialogTrigger,
   Heading as AriaHeading,
-  type HeadingProps as AriaHeadingProps,
   Modal as AriaModal,
   ModalOverlay as AriaModalOverlay,
-  type ModalOverlayProps as AriaModalOverlayProps,
   composeRenderProps,
-} from "react-aria-components";
+  type DialogProps as AriaDialogProps,
+  type HeadingProps as AriaHeadingProps,
+  type ModalOverlayProps as AriaModalOverlayProps,
+} from "react-aria-components"
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
-const Dialog = AriaDialog;
+const Dialog = AriaDialog
 
 const sheetVariants = cva(
   [
@@ -38,9 +39,9 @@ const sheetVariants = cva(
       },
     },
   }
-);
+)
 
-const DialogTrigger = AriaDialogTrigger;
+const DialogTrigger = AriaDialogTrigger
 
 const DialogOverlay = ({
   className,
@@ -61,14 +62,14 @@ const DialogOverlay = ({
     )}
     {...props}
   />
-);
+)
 
 interface DialogContentProps
   extends Omit<React.ComponentProps<typeof AriaModal>, "children">,
     VariantProps<typeof sheetVariants> {
-  children?: AriaDialogProps["children"];
-  role?: AriaDialogProps["role"];
-  closeButton?: boolean;
+  children?: AriaDialogProps["children"]
+  role?: AriaDialogProps["role"]
+  closeButton?: boolean
 }
 
 const DialogContent = ({
@@ -100,7 +101,7 @@ const DialogContent = ({
           {closeButton && (
             <AriaButton
               onPress={renderProps.close}
-              className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity data-[disabled]:pointer-events-none data-[entering]:bg-accent data-[entering]:text-muted-foreground data-[hovered]:opacity-100 data-[focused]:outline-none data-[focused]:ring-2 data-[focused]:ring-ring data-[focused]:ring-offset-2"
+              className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity data-[disabled]:pointer-events-none data-[entering]:bg-gray-a-3 data-[entering]:text-gray-11 data-[hovered]:opacity-100 data-[focused]:outline-none data-[focused]:ring-2 data-[focused]:ring-blue-8 data-[focused]:ring-offset-2"
             >
               <X className="size-4" />
               <span className="sr-only">Close</span>
@@ -110,7 +111,7 @@ const DialogContent = ({
       ))}
     </AriaDialog>
   </AriaModal>
-);
+)
 
 const DialogHeader = ({
   className,
@@ -123,7 +124,7 @@ const DialogHeader = ({
     )}
     {...props}
   />
-);
+)
 
 const DialogFooter = ({
   className,
@@ -136,7 +137,7 @@ const DialogFooter = ({
     )}
     {...props}
   />
-);
+)
 
 const DialogTitle = ({ className, ...props }: AriaHeadingProps) => (
   <AriaHeading
@@ -147,7 +148,7 @@ const DialogTitle = ({ className, ...props }: AriaHeadingProps) => (
     )}
     {...props}
   />
-);
+)
 
 const DialogDescription = ({
   className,
@@ -160,7 +161,7 @@ const DialogDescription = ({
     )}
     {...props}
   />
-);
+)
 
 export {
   Dialog,
@@ -171,5 +172,5 @@ export {
   DialogHeader,
   DialogFooter,
   DialogTitle,
-};
-export type { DialogContentProps };
+}
+export type { DialogContentProps }

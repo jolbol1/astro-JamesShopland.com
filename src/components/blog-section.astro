@@ -1,0 +1,61 @@
+---
+import { getPosts, getTags } from "@/lib/posts"
+
+import { Link } from "@/components/ui/link"
+import { ArticleList, ArticleListMin } from "@/components/article-list"
+
+import { CategoryList } from "./category-list"
+
+const posts = await getPosts(5, true)
+const tags = await getTags(20)
+---
+
+<div class="mx-auto mt-12 max-w-6xl px-4 sm:px-8">
+  <div
+    class="z-[-1] h-12 w-full bg-gradient-to-t from-background to-transparent"
+  >
+  </div>
+  <h2
+    id="latest-posts-heading"
+    class="bg-background font-medium uppercase tracking-widest text-blue-11"
+  >
+    Latest Posts
+  </h2>
+  <div
+    class="grid w-full grid-cols-1 gap-12 bg-background md:grid-cols-[2fr_1fr]"
+  >
+    <div class="flex flex-col gap-6">
+      <ArticleList
+        aria-labelledby="latest-posts-heading"
+        client:load
+        posts={posts}
+      />
+      <Link href="/blog" className="mx-auto w-3/4"> View All Posts </Link>
+    </div>
+    <div>
+      <h2
+        id="categories-heading"
+        class="mb-4 font-medium uppercase tracking-widest text-blue-11"
+      >
+        Categories
+      </h2>
+      <CategoryList
+        client:load
+        aria-labelledby="categories-heading"
+        categories={tags}
+      />
+
+      <h2
+        id="top-posts-heading"
+        class="mb-4 mt-12 font-medium uppercase tracking-widest text-blue-11"
+      >
+        Top Posts
+      </h2>
+      <ArticleListMin
+        aria-labelledby="top-posts-heading"
+        client:load
+        posts={posts.slice(0, 3)}
+      />
+    </div>
+  </div>
+</div>

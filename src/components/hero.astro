@@ -1,0 +1,70 @@
+---
+import BetterStack from "@/assets/icons/better-stack.svg"
+import Youtube from "@/assets/icons/youtube.svg"
+import hero from "@/assets/images/hero-image.webp"
+import { Image } from "astro:assets"
+
+import { Link } from "@/components/ui/link"
+---
+
+<section class="relative mx-auto max-w-6xl px-8">
+  <div
+    class="absolute inset-x-0 top-0 z-[-1] -translate-y-12 sm:left-auto lg:-translate-y-20"
+  >
+    <Image
+      src={hero}
+      alt={""}
+      quality={50}
+      class="mx-auto max-h-[380px] w-full max-w-[380px] object-contain lg:max-h-[480px] lg:max-w-[480px]"
+      priority={true}
+      fetchpriority="high"
+      loading="eager"
+      width={640}
+    />
+
+    <div
+      class="absolute bottom-0 h-12 w-full bg-gradient-to-t from-background to-transparent"
+    >
+    </div>
+  </div>
+  <div
+    class="mx-auto my-12 mb-24 flex w-full flex-col items-center justify-between pt-64 sm:flex-row sm:pt-0"
+  >
+    <div class="shrink-0 pt-16 md:flex md:h-full md:flex-col">
+      <h1
+        class="mb-4 max-w-2xl text-center text-4xl font-extrabold leading-none tracking-tight text-gray-12 sm:text-left md:text-5xl xl:text-6xl"
+      >
+        Hello, I'm James
+      </h1>
+      <p
+        class="mb-6 flex max-w-2xl flex-wrap items-center justify-center gap-x-1 text-gray-a-11 sm:justify-start md:text-lg lg:mb-8 lg:text-xl"
+      >
+        Developer Advocate <span class="flex flex-wrap items-center gap-x-1"
+          >at <Link
+            client:load
+            href="https://jollycod.ing/work"
+            target="_blank"
+            variant="link"
+            aria-label="Better Stack"
+            className="p-0 data-[hovered]:text-gray-12"
+          >
+            <BetterStack class="ml-[-16px] h-4" />
+          </Link></span
+        >
+      </p>
+      <div class="flex w-full justify-center sm:justify-start">
+        <Link client:load href="/blog" className="mr-3"> View my blog </Link>
+        <Link
+          target="_blank"
+          client:load
+          variant="destructive"
+          href="https://www.youtube.com/@jollycoding"
+          className="inline-flex items-center justify-center gap-2"
+        >
+          <Youtube aria-hidden class="size-4 fill-current" />
+          YouTube
+        </Link>
+      </div>
+    </div>
+  </div>
+</section>
