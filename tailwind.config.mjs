@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-import { fontFamily } from "tailwindcss/defaultTheme";
-import typography from "@tailwindcss/typography";
-import animate from "tailwindcss-animate";
+import animate from "tailwindcss-animate"
+import { fontFamily } from "tailwindcss/defaultTheme"
 
 export default {
   darkMode: ["class"],
@@ -98,5 +97,5 @@ export default {
       },
     },
   },
-  plugins: [typography, animate],
-};
+  plugins: [animate],
+}

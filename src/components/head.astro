@@ -1,0 +1,124 @@
+---
+import { siteConfig } from "@/../site-config"
+import { SEO } from "astro-seo"
+
+import "../styles/globals.css"
+
+import { join } from "node:path"
+
+import { AstroFont } from "astro-font"
+
+import type { BaseHeadProps } from "@/types/types"
+
+type Props = BaseHeadProps
+
+const {
+  title,
+  description = siteConfig.description,
+  articleDate,
+  articleUpdatedDate,
+  tags,
+} = Astro.props
+const socialImageURL = articleDate
+  ? new URL(`${Astro.url.pathname}/og.png`, Astro.url).href
+  : new URL("/og.png", Astro.url).href
+---
+
+<!-- Global Metadata -->
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<!-- SEO -->
+<SEO
+  titleTemplate={`%s | ${siteConfig.title}`}
+  title={title}
+  description={description}
+  charset="utf-8"
+  openGraph={{
+    basic: {
+      title: title,
+      type: articleDate ? "article" : "website",
+      image: socialImageURL,
+    },
+    optional: {
+      description: description,
+      siteName: siteConfig.title,
+    },
+    image: {
+      url: socialImageURL,
+      type: "image/png",
+      width: 1200,
+      height: 630,
+      alt: title,
+    },
+    ...(articleDate
+      ? {
+          article: {
+            publishedTime: articleDate,
+            modifiedTime: articleUpdatedDate,
+            authors: ["@jollyshopland"],
+            section: "Blog",
+            tags: tags,
+          },
+        }
+      : {}),
+  }}
+  twitter={{
+    card: "summary_large_image",
+    site: "@jollyshopland",
+    creator: "@jollyshopland",
+    title: title,
+    description: description,
+    image: socialImageURL,
+    imageAlt: title,
+  }}
+/>
+
+<!-- RSS auto-discovery -->
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={siteConfig.title}
+  href="/rss.xml"
+/>
+
+<!-- Fonts -->
+<AstroFont
+  config={[
+    {
+      src: [],
+      name: "Inter",
+      // Google Fonts URL
+      googleFontsURL:
+        "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap",
+      preload: true,
+      display: "swap",
+      selector: "body",
+      fallback: "sans-serif",
+    },
+  ]}
+/>
+<AstroFont
+  config={[
+    {
+      name: "JetBrainsMono",
+      src: [
+        {
+          style: "normal",
+          weight: "400",
+          path: join(
+            process.cwd(),
+            "public",
+            "fonts",
+            "JetBrainsMono-Regular.ttf"
+          ),
+        },
+      ],
+      preload: articleDate ? true : false,
+      display: "swap",
+      selector: "body",
+      fallback: "monospace",
+    },
+  ]}
+/>

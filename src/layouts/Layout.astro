@@ -1,32 +1,30 @@
+---
+import type { BaseHeadProps } from "@/types/types"
+
+import Head from "@/components/head.astro"
+import Theme from "@/components/theme.astro"
+
+type Props = BaseHeadProps
+
+const { title, description, articleDate, articleUpdatedDate, tags } =
+  Astro.props
+---
+
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
+    <Head
+      title={title}
+      description={description}
+      articleDate={articleDate}
+      articleUpdatedDate={articleUpdatedDate}
+      tags={tags}
     />
-
-    <title>Astro Basics</title>
+    <Theme />
   </head>
-  <body>
-    <slot />
+  <body class="mx-auto flex min-h-screen flex-col items-center">
+    <main class="w-full flex-1">
+      <slot />
+    </main>
   </body>
 </html>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>
