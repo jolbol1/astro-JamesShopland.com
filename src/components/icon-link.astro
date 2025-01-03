@@ -1,0 +1,21 @@
+---
+import { Link } from "@/components/ui/link"
+
+interface Props {
+  href: string
+}
+
+const { href } = Astro.props
+---
+
+<Link
+  href={href}
+  className={"fill-gray-8 text-gray-8 data-[hovered]:fill-gray-a-12"}
+  target="_blank"
+  variant="ghost"
+  size="icon"
+  client:load
+  rel="noopener noreferrer"
+>
+  <slot />
+</Link>

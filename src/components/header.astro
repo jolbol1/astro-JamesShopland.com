@@ -1,0 +1,121 @@
+---
+import BlueSky from "@/assets/icons/bluesky.svg"
+import Github from "@/assets/icons/github.svg"
+import LinkedIn from "@/assets/icons/linkedin.svg"
+import Mail from "@/assets/icons/mail.svg"
+import Twitter from "@/assets/icons/twitter.svg"
+import YouTube from "@/assets/icons/youtube.svg"
+import LogoImage from "@/assets/images/logo.webp"
+import { Image } from "astro:assets"
+import { GithubIcon } from "lucide-react"
+import { siteConfig } from "site-config"
+
+import { DarkModeButton } from "@/components/dark-mode-button.tsx"
+import GlowDiv from "@/components/glow-div.astro"
+import IconLink from "@/components/icon-link.astro"
+
+import { MobileNav } from "./mobile-nav"
+import { Link } from "./ui/link"
+---
+
+<div
+  class="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky inset-x-0 top-0 z-10 w-full backdrop-blur"
+>
+  <div class="relative mx-auto w-full max-w-6xl px-4 sm:px-8">
+    <div class="flex h-20 items-center">
+      <header
+        class="flex h-12 shrink grow basis-0 items-center justify-between gap-8"
+      >
+        <Link
+          className="flex items-center justify-between gap-3 px-0 align-middle data-[hovered]:bg-transparent"
+          href="/"
+          client:load
+          variant="ghost"
+          aria-label="Home"
+        >
+          <GlowDiv>
+            <Image
+              src={LogoImage}
+              class="size-12"
+              alt=""
+              height={48}
+              width={48}
+              quality={75}
+              layout="fixed"
+              loading="eager"
+              fetchpriority="high"
+              priority={true}
+            />
+          </GlowDiv>
+          <div
+            class="underlined hidden text-2xl font-semibold after:bottom-0 [@media(min-width:510px)]:block"
+          >
+            James Shopland
+          </div>
+        </Link>
+        <nav class="relative hidden md:block">
+          <ul class="m-0 flex list-none justify-center gap-2 p-0">
+            <Link className="text-base" client:load href="/blog" variant="link">
+              Blog
+            </Link>
+            <!-- <Link
+              className="text-base"
+              client:load
+              variant="link"
+              href="/about"
+            >
+              Videos
+            </Link> -->
+            <Link
+              className="text-base"
+              client:load
+              variant="link"
+              href="/about"
+            >
+              About
+            </Link>
+          </ul>
+        </nav>
+        <div class="ml-auto flex content-end items-center gap-4 self-stretch">
+          <Link
+            client:load
+            className="text-blue-a-11 data-[hovered]:text-blue-a-12"
+            target="_blank"
+            href="https://github.com/jolbol1"
+            variant="ghost"
+            size="icon"
+          >
+            <GithubIcon className="size-6" />
+          </Link>
+          <GlowDiv>
+            <DarkModeButton client:load />
+          </GlowDiv>
+          <GlowDiv className="block md:hidden">
+            <MobileNav client:visible>
+              <div slot="socials" class="flex flex-wrap px-2 lg:mb-0">
+                <IconLink href={siteConfig.twitter}>
+                  <Twitter class="size-6" />
+                </IconLink>
+                <IconLink href={siteConfig.bluesky}>
+                  <BlueSky class="size-6" />
+                </IconLink>
+                <IconLink href={siteConfig.youtube}>
+                  <YouTube class="size-6" />
+                </IconLink>
+                <IconLink href={siteConfig.github}>
+                  <Github class="size-6" />
+                </IconLink>
+                <IconLink href={siteConfig.linkedin}>
+                  <LinkedIn class="size-6" />
+                </IconLink>
+                <IconLink href={siteConfig.email}>
+                  <Mail class="size-6" />
+                </IconLink>
+              </div>
+            </MobileNav>
+          </GlowDiv>
+        </div>
+      </header>
+    </div>
+  </div>
+</div>

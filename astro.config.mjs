@@ -1,21 +1,19 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig } from "astro/config"
 
-import react from "@astrojs/react";
-
-import tailwind from "@astrojs/tailwind";
-
-import mdx from "@astrojs/mdx";
-
-import sitemap from "@astrojs/sitemap";
-
-import vercel from "@astrojs/vercel";
-
-import expressiveCode from "astro-expressive-code";
+import mdx from "@astrojs/mdx"
+import react from "@astrojs/react"
+import sitemap from "@astrojs/sitemap"
+import tailwind from "@astrojs/tailwind"
+import vercel from "@astrojs/vercel"
+import expressiveCode from "astro-expressive-code"
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://jamesshopland.com",
+  experimental: {
+    svg: true,
+  },
   integrations: [
     expressiveCode(),
     mdx(),
@@ -25,6 +23,7 @@ export default defineConfig({
   ],
   adapter: vercel({
     imageService: true,
+    devImageService: "sharp",
     imagesConfig: {
       domains: [""],
       sizes: [
@@ -36,4 +35,4 @@ export default defineConfig({
       enabled: true,
     },
   }),
-});
+})

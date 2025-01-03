@@ -2,6 +2,7 @@
 import type { BaseHeadProps } from "@/types/types"
 
 import Head from "@/components/head.astro"
+import Header from "@/components/header.astro"
 import Theme from "@/components/theme.astro"
 
 type Props = BaseHeadProps
@@ -23,6 +24,7 @@ const { title, description, articleDate, articleUpdatedDate, tags } =
     <Theme />
   </head>
   <body class="mx-auto flex min-h-screen flex-col items-center">
+    <Header />
     <main class="w-full flex-1">
       <slot />
     </main>

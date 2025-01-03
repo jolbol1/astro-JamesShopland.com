@@ -1,4 +1,3 @@
-
 export const siteConfig = {
   title: "James Shopland",
   author: "James Shopland",
@@ -14,9 +13,8 @@ export const siteConfig = {
   twitter: "https://twitter.com/JollyShopland",
   facebook: "https://facebook.com",
   youtube: "https://www.youtube.com/@JollyCoding",
+  bluesky: "https://bsky.app/profile/jollycod.ing",
   linkedin: "https://www.linkedin.com/in/james-shopland",
   work: "https://www.jollycod.ing/work",
   locale: "en-GB",
-
 }
-
