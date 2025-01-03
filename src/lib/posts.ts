@@ -6,9 +6,19 @@ import type { Tag } from "@/types/types"
 import { formatDate } from "./date"
 import { getReadingTime } from "./reading-time"
 
-export async function getPosts(limit?: number, includeDrafts: boolean = false) {
+export async function getPosts(
+  limit?: number,
+  includeDrafts: boolean = false,
+  tagSlug?: string
+) {
   const posts = (await getCollection("blog"))
     .filter((post) => (includeDrafts ? true : post.data.draft !== true))
+    .filter((post) => {
+      if (!tagSlug) return true
+      return post.data.tags?.some(
+        (tag) => kebabCase(tag.toLowerCase()) === tagSlug
+      )
+    })
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
     .slice(0, limit)
     .map((post) => ({

@@ -1,0 +1,28 @@
+---
+import Layout from "@/layouts/Layout.astro"
+
+import { getTags } from "@/lib/posts"
+
+import BlogSection from "@/components/blog-section.astro"
+
+export async function getStaticPaths() {
+  const tags = await getTags()
+  return tags.map((tag) => {
+    return {
+      params: { tag: tag.slug },
+      props: tag,
+    }
+  })
+}
+
+const { tag, slug } = Astro.props
+---
+
+<Layout title={tag}>
+  <h1
+    class="my-12 max-w-2xl px-4 text-center text-4xl font-extrabold capitalize leading-none tracking-tight text-gray-12 sm:px-8 sm:text-left md:text-5xl xl:text-6xl"
+  >
+    {tag}
+  </h1>
+  <BlogSection tagSlug={slug} />
+</Layout>
