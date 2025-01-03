@@ -17,4 +17,5 @@ export const siteConfig = {
   linkedin: "https://www.linkedin.com/in/james-shopland",
   work: "https://www.jollycod.ing/work",
   locale: "en-GB",
+  url: "https://jamesshopland.com",
 }
