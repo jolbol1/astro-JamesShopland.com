@@ -104,14 +104,16 @@ const socialImageURL = articleDate
 <AstroFont
   config={[
     {
-      src: [],
       name: "Inter",
-      // Google Fonts URL
-      googleFontsURL:
-        "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
+      src: [
+        {
+          style: "normal",
+          weight: "400",
+          path: join(process.cwd(), "public", "fonts", "Inter-Regular.woff2"),
+        },
+      ],
       preload: true,
       display: "swap",
-      selector: "body",
       fallback: "sans-serif",
     },
   ]}
