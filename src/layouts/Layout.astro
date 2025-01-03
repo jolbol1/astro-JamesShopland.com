@@ -1,6 +1,7 @@
 ---
 import type { BaseHeadProps } from "@/types/types"
 
+import Footer from "@/components/footer.astro"
 import Head from "@/components/head.astro"
 import Header from "@/components/header.astro"
 import Theme from "@/components/theme.astro"
@@ -28,5 +29,6 @@ const { title, description, articleDate, articleUpdatedDate, tags } =
     <main class="w-full flex-1">
       <slot />
     </main>
+    <Footer />
   </body>
 </html>

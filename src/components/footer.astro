@@ -1,0 +1,153 @@
+---
+import BlueSky from "@/assets/icons/bluesky.svg"
+import Github from "@/assets/icons/github.svg"
+import LinkedIn from "@/assets/icons/linkedin.svg"
+import Mail from "@/assets/icons/mail.svg"
+import Twitter from "@/assets/icons/twitter.svg"
+import YouTube from "@/assets/icons/youtube.svg"
+
+import { Link } from "@/components/ui/link"
+import IconWrapper from "@/components/icon-link.astro"
+---
+
+<footer class="relative mt-24 w-full max-w-6xl px-4 pb-6 pt-8 sm:px-8">
+  <hr class="my-6" />
+
+  <div class="flex flex-wrap justify-between gap-8">
+    <div class="">
+      <div class="">
+        <div class="">
+          <h4 class="text-lg font-medium uppercase text-blue-9">Follow me</h4>
+          <h5 class="mb-2 mt-0 text-sm">Find me on any of these platforms.</h5>
+          <div class="flex lg:mb-0">
+            <IconWrapper href="https://twitter.com/your-handle">
+              <Twitter class="size-6" />
+            </IconWrapper>
+            <IconWrapper href="https://bsky.app/profile/your-profile">
+              <BlueSky class="size-6" />
+            </IconWrapper>
+            <IconWrapper href="https://youtube.com/@your-channel">
+              <YouTube class="size-6" />
+            </IconWrapper>
+            <IconWrapper href="https://github.com/jolbol1">
+              <Github class="size-6" />
+            </IconWrapper>
+            <IconWrapper href="https://linkedin.com/in/your-profile">
+              <LinkedIn class="size-6" />
+            </IconWrapper>
+            <IconWrapper href="mailto:your-email@example.com">
+              <Mail class="size-6" />
+            </IconWrapper>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-wrap gap-8 sm:gap-16">
+      <div>
+        <h2 class="text-lg font-medium uppercase text-blue-9">Categories</h2>
+        <ul>
+          <li>
+            <Link
+              className={"h-fit w-full justify-start p-0 font-normal"}
+              variant="link"
+              client:load
+              href="/tags/react"
+            >
+              React
+            </Link>
+          </li>
+          <li>
+            <Link
+              className={"h-fit w-full justify-start p-0 font-normal"}
+              variant="link"
+              client:load
+              href="/tags/css"
+            >
+              css
+            </Link>
+          </li>
+          <li>
+            <Link
+              className={"h-fit w-full justify-start p-0 font-normal"}
+              variant="link"
+              client:load
+              href="/tags/nextjs"
+            >
+              Next.js
+            </Link>
+          </li>
+          <li>
+            <Link
+              className={"h-fit w-full justify-start p-0 font-normal"}
+              variant="link"
+              client:load
+              href="/tags/javascript"
+            >
+              JavaScript
+            </Link>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="text-lg font-medium uppercase text-blue-9">Navigation</h2>
+        <ul>
+          <li>
+            <Link
+              className={"h-fit w-full justify-start p-0 font-normal"}
+              variant="link"
+              client:load
+              href="/"
+            >
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              className={"h-fit w-full justify-start p-0 font-normal"}
+              variant="link"
+              client:load
+              href="/blog"
+            >
+              Blog
+            </Link>
+          </li>
+          <!-- <li>
+            <Link
+              className={"p-0 font-normal w-full justify-start h-fit"}
+              variant="link"
+              client:load
+              href="/videos"
+            >
+              Videos
+            </Link>
+          </li> -->
+          <li>
+            <Link
+              className={"h-fit w-full justify-start p-0 font-normal"}
+              variant="link"
+              client:load
+              href="/about"
+            >
+              About
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <hr class="my-6" />
+
+  <div class="flex flex-wrap items-center justify-center md:justify-between">
+    <div class="mx-auto w-full px-4 text-center">
+      <div class="py-1 text-sm text-gray-a-11">
+        Made with ❤️ by
+        <Link
+          client:load
+          variant="link"
+          href="https://www.jamesshopland.com"
+          className="h-fit p-0 text-gray-a-11">James Shopland</Link
+        >
+      </div>
+    </div>
+  </div>
+</footer>
