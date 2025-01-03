@@ -1,14 +1,16 @@
 // @ts-check
 import { defineConfig } from "astro/config"
 
+import db from "@astrojs/db"
 import mdx from "@astrojs/mdx"
 import react from "@astrojs/react"
 import sitemap from "@astrojs/sitemap"
 import tailwind from "@astrojs/tailwind"
 import vercel from "@astrojs/vercel"
+import remarkEmbedder from "@remark-embedder/core"
 import expressiveCode from "astro-expressive-code"
 
-import db from "@astrojs/db";
+import { remarkOembedOptions } from "./src/lib/oembed"
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,8 +18,16 @@ export default defineConfig({
   experimental: {
     svg: true,
   },
+  markdown: {
+    // @ts-expect-error oembed error
+    remarkPlugins: [[remarkEmbedder.default, remarkOembedOptions]],
+  },
   integrations: [
-    expressiveCode(),
+    expressiveCode({
+      styleOverrides: {
+        codeFontFamily: "JetBrainsMono",
+      },
+    }),
     mdx(),
     react(),
     tailwind({ applyBaseStyles: false }),
