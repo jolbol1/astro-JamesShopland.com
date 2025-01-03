@@ -32,7 +32,7 @@ export async function getPosts(
           .select()
           .from(blogViews)
           .where(eq(blogViews.slug, post.id))
-        viewCount = count[0].count
+        viewCount = count.length > 0 ? count[0].count : 0
       }
 
       return {
