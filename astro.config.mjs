@@ -18,6 +18,7 @@ import { remarkOembedOptions } from "./src/lib/oembed"
 
 // https://astro.build/config
 export default defineConfig({
+  output: "server",
   site: "https://jamesshopland.com",
   experimental: {
     responsiveImages: true,
