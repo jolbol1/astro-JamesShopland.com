@@ -1,0 +1,40 @@
+  /** @type {import('prettier').Config} */
+export default {
+  endOfLine: "lf",
+  semi: false,
+  singleQuote: false,
+  tabWidth: 2,
+  trailingComma: "es5",
+  bracketSpacing: true,
+  importOrder: [
+    "^(astro/(.*)$)|^(astro$)",
+    "^(react/(.*)$)|^(react$)",
+    "",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "^types$",
+    "^@/env(.*)$",
+    "^@/types/(.*)$",
+    "^@/config/(.*)$",
+    "",
+    "^@/lib/(.*)$",
+    "^@/hooks/(.*)$",
+    "",
+    "^@/components/ui/(.*)$",
+    "^@/components/(.*)$",
+    "",
+    "^@/styles/(.*)$",
+    "^@/app/(.*)$",
+    "",
+    "^[./]",
+  ],
+  plugins: ["@ianvs/prettier-plugin-sort-imports", "prettier-plugin-astro"],
+  overrides: [
+    {
+      files: ["*.astro"],
+      options: {
+        parser: "astro",
+      },
+    },
+  ],
+};
