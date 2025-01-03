@@ -19,4 +19,5 @@ export interface Post extends CollectionEntry<"blog"> {
   formattedDate: string
   formattedUpdatedDate: string
   formattedTags: Tag[]
+  viewCount: number
 }

@@ -1,4 +1,5 @@
 import { getCollection } from "astro:content"
+import { blogViews, db, eq } from "astro:db"
 import kebabCase from "lodash.kebabcase"
 
 import type { Post, Tag } from "@/types/types"
@@ -9,7 +10,9 @@ import { getReadingTime } from "./reading-time"
 export async function getPosts(
   limit?: number,
   includeDrafts: boolean = false,
-  tagSlug?: string
+  tagSlug?: string,
+  includeViewCount: boolean = false,
+  sortBy: "date" | "views" = "date"
 ) {
   const posts = (await getCollection("blog"))
     .filter((post) => (includeDrafts ? true : post.data.draft !== true))
@@ -20,22 +23,41 @@ export async function getPosts(
       )
     })
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-    .slice(0, limit)
-    .map((post) => ({
-      ...post,
-      readingTime: getReadingTime(post.body ?? ""),
-      postSlug: kebabCase(post.id.toLowerCase()),
-      formattedDate: formatDate(post.data.date),
-      formattedUpdatedDate: post.data.updatedDate
-        ? formatDate(post.data.updatedDate)
-        : undefined,
-      formattedTags: post.data.tags?.map((tag) => ({
-        tag: tag.toLowerCase(),
-        slug: kebabCase(tag.toLowerCase()),
-      })),
-    }))
+    .slice(0, includeViewCount ? undefined : limit)
+    .map(async (post) => {
+      const postSLug = kebabCase(post.id.toLowerCase())
+      let viewCount = 0
+      if (includeViewCount) {
+        const count = await db
+          .select()
+          .from(blogViews)
+          .where(eq(blogViews.slug, post.id))
+        viewCount = count[0].count
+      }
 
-  return posts as Post[]
+      return {
+        ...post,
+        readingTime: getReadingTime(post.body ?? ""),
+        postSlug: postSLug,
+        formattedDate: formatDate(post.data.date),
+        formattedUpdatedDate: post.data.updatedDate
+          ? formatDate(post.data.updatedDate)
+          : undefined,
+        formattedTags: post.data.tags?.map((tag) => ({
+          tag: tag.toLowerCase(),
+          slug: kebabCase(tag.toLowerCase()),
+        })),
+        viewCount: includeViewCount ? viewCount : 0,
+      }
+    })
+
+  const postsNormal = await Promise.all(posts)
+
+  if (sortBy === "views") {
+    postsNormal.sort((a, b) => b.viewCount - a.viewCount)
+  }
+
+  return postsNormal.slice(0, limit) as Post[]
 }
 
 export async function getTags(limit?: number): Promise<Tag[]> {

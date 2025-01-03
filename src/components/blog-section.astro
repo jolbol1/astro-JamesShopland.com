@@ -17,6 +17,7 @@ const { limit, tagsLimit, tagSlug, includeDrafts = false } = Astro.props
 
 const posts = await getPosts(limit, includeDrafts, tagSlug)
 const tags = await getTags(tagsLimit)
+const popularPosts = await getPosts(5, includeDrafts, tagSlug, true, "views")
 ---
 
 <div class="mx-auto mt-12 max-w-6xl px-4 sm:px-8">
@@ -70,7 +71,7 @@ const tags = await getTags(tagsLimit)
       <ArticleListMin
         aria-labelledby="top-posts-heading"
         client:load
-        posts={posts.slice(0, 3)}
+        posts={popularPosts}
       />
     </div>
   </div>
