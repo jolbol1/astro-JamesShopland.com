@@ -1,7 +1,7 @@
 import { getCollection } from "astro:content"
 import kebabCase from "lodash.kebabcase"
 
-import type { Tag } from "@/types/types"
+import type { Post, Tag } from "@/types/types"
 
 import { formatDate } from "./date"
 import { getReadingTime } from "./reading-time"
@@ -24,14 +24,18 @@ export async function getPosts(
     .map((post) => ({
       ...post,
       readingTime: getReadingTime(post.body ?? ""),
+      postSlug: kebabCase(post.id.toLowerCase()),
       formattedDate: formatDate(post.data.date),
+      formattedUpdatedDate: post.data.updatedDate
+        ? formatDate(post.data.updatedDate)
+        : undefined,
       formattedTags: post.data.tags?.map((tag) => ({
         tag: tag.toLowerCase(),
         slug: kebabCase(tag.toLowerCase()),
       })),
     }))
 
-  return posts
+  return posts as Post[]
 }
 
 export async function getTags(limit?: number): Promise<Tag[]> {

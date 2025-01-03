@@ -8,6 +8,8 @@ import tailwind from "@astrojs/tailwind"
 import vercel from "@astrojs/vercel"
 import expressiveCode from "astro-expressive-code"
 
+import db from "@astrojs/db";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://jamesshopland.com",
@@ -20,6 +22,7 @@ export default defineConfig({
     react(),
     tailwind({ applyBaseStyles: false }),
     sitemap(),
+    db(),
   ],
   adapter: vercel({
     imageService: true,

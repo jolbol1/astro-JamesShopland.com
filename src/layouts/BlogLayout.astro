@@ -1,0 +1,66 @@
+---
+import type { CollectionEntry } from "astro:content"
+
+import type { Post } from "@/types/types"
+
+import TableOfContents from "@/components/table-of-contents.astro"
+import ViewCount from "@/components/view-count.astro"
+
+type Props = CollectionEntry<"blog">["data"] & {
+  headings: import("astro").MarkdownHeading[]
+  post: Post
+}
+
+const { post, headings } = Astro.props
+---
+
+<article class="w-full">
+  <div
+    class="mx-auto flex w-full max-w-6xl flex-col items-center justify-center gap-5 px-4 py-20 sm:px-8"
+  >
+    <h1
+      class="w-full text-balance text-left text-4xl font-medium md:text-center [@media(min-width:1100px)]:text-left"
+    >
+      {post.data.title}
+    </h1>
+    <div
+      class="text-muted-foreground w-full gap-1 text-left italic md:text-center [@media(min-width:1100px)]:text-left"
+    >
+      Posted on <span class="text-primary not-italic">{post.formattedDate}</span
+      >
+      {
+        post.formattedUpdatedDate && (
+          <>
+            (Last updated on
+            <span class="text-primary not-italic">
+              {post.formattedUpdatedDate}
+            </span>
+            )
+          </>
+        )
+      }
+    </div>
+  </div>
+  <div
+    class="grid w-full grid-cols-[1fr_minmax(auto,44rem)_1fr] px-4 sm:px-8 [&>*]:col-start-2 [&>*]:min-w-0 [@media(min-width:1070px)]:grid-cols-[0_45.5rem_1fr_0] [@media(min-width:1100px)]:grid-cols-[1fr_45.5rem_22.5rem_1fr]"
+  >
+    <slot />
+    <div
+      class="sticky top-40 col-start-3 row-span-full ml-auto hidden max-w-64 self-start [@media(min-width:1070px)]:block"
+      style="grid-column: 3; grid-row: 1 / 200"
+    >
+      <TableOfContents headings={headings} />
+
+      <ViewCount server:defer slug={post.postSlug} />
+    </div>
+  </div>
+  <div class="flex w-full justify-center [@media(min-width:1070px)]:hidden">
+    <ViewCount server:defer slug={post.postSlug} />
+  </div>
+
+  <script>
+    import { actions } from "astro:actions"
+
+    actions.pageView({ slug: window.location.pathname.split("/")[2] })
+  </script>
+</article>

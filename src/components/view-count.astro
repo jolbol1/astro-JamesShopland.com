@@ -1,0 +1,14 @@
+---
+import { blogViews, db, eq } from "astro:db"
+
+const { slug } = Astro.props
+
+const viewCount = await db
+  .select()
+  .from(blogViews)
+  .where(eq(blogViews.slug, slug))
+---
+
+<p class="mt-4 font-mono text-sm text-gray-a-11">
+  Seen by {viewCount[0]?.count ?? 1} developers
+</p>

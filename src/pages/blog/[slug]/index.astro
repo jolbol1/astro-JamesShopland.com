@@ -1,0 +1,38 @@
+---
+import BlogLayout from "@/layouts/BlogLayout.astro"
+import Layout from "@/layouts/Layout.astro"
+import { render } from "astro:content"
+
+import type { Post } from "@/types/types"
+
+import { getPosts } from "@/lib/posts"
+
+import { components } from "@/components/mdx"
+
+export async function getStaticPaths() {
+  const posts = await getPosts()
+  return posts.map((post) => ({
+    params: { slug: post.postSlug },
+    props: post,
+  }))
+}
+type Props = Post
+
+const post = Astro.props
+const { Content, headings } = await render(post)
+---
+
+<Layout
+  title={post.data.title}
+  description={post.data.summary}
+  articleDate={post.data.date.toISOString()}
+  articleUpdatedDate={post.data.updatedDate?.toISOString()}
+  tags={post.data.tags}
+>
+  <BlogLayout post={post} headings={headings} {...post.data}>
+    <a id="introduction" class="toc-link scroll-mt-40">
+      <span class="absolute size-px overflow-hidden">Introduction</span>
+    </a>
+    <Content components={components} />
+  </BlogLayout>
+</Layout>

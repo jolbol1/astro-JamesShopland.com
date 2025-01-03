@@ -1,0 +1,28 @@
+---
+import type { MarkdownHeading } from "astro";
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+
+const filteredHeadings = headings.filter((heading) => heading.depth <= 2);
+---
+
+<nav class="w-64">
+  <h2 class="mb-3 uppercase">Table of Contents</h2>
+  <nav class="text-muted-foreground flex flex-col gap-2">
+    <a href="#introduction">Introduction</a>
+    {
+      filteredHeadings.map((heading) => (
+        <a
+          class={`${heading.depth === 2 ? "text-base" : "pl-3 text-sm"}`}
+          href={`#${heading.slug}`}
+        >
+          {heading.text}
+        </a>
+      ))
+    }
+  </nav>
+</nav>
