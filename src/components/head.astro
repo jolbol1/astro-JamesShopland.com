@@ -6,11 +6,22 @@ import "../styles/globals.css"
 
 import { join } from "node:path"
 
+import faviconSrc from "@/assets/favicons/favicon.png"
+import faviconSvgSrc from "@/assets/favicons/favicon.svg"
 import { AstroFont } from "astro-font"
+import { getImage } from "astro:assets"
 
 import type { BaseHeadProps } from "@/types/types"
 
 type Props = BaseHeadProps
+
+const appleTouchIcon = await getImage({
+  src: faviconSrc,
+  width: 180,
+  height: 180,
+  format: "png",
+})
+const faviconSvg = await getImage({ src: faviconSvgSrc, format: "svg" })
 
 const {
   title,
@@ -20,14 +31,20 @@ const {
   tags,
 } = Astro.props
 const socialImageURL = articleDate
-  ? new URL(`${Astro.url.pathname}/og.png`, Astro.url).href
-  : new URL("/og.png", Astro.url).href
+  ? new URL(`${Astro.url.pathname}og.png`, Astro.url).href
+  : new URL("og.png", Astro.url).href
 ---
 
 <!-- Global Metadata -->
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
 <link rel="sitemap" href="/sitemap-index.xml" />
+
+<!-- Favicons -->
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href={faviconSvg.src} type="image/svg+xml" />
+<link rel="apple-touch-icon" href={appleTouchIcon.src} />
+<link rel="manifest" href="/manifest.json" />
 
 <!-- SEO -->
 <SEO

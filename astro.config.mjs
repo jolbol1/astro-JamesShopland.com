@@ -20,6 +20,7 @@ import { remarkOembedOptions } from "./src/lib/oembed"
 export default defineConfig({
   site: "https://jamesshopland.com",
   experimental: {
+    responsiveImages: true,
     svg: true,
   },
   markdown: {
@@ -48,7 +49,7 @@ export default defineConfig({
     imageService: true,
     devImageService: "sharp",
     imagesConfig: {
-      domains: [""],
+      domains: ["jamesshopland.com"],
       sizes: [
         16, 32, 48, 64, 96, 128, 256, 384, 640, 750, 828, 1080, 1200, 1920,
         2048, 3840,
