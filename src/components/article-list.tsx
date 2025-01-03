@@ -41,7 +41,14 @@ export function ArticleList({ posts, ...props }: ArticleListProps) {
         >
           <Link
             href={`/blog/${item.postSlug}/`}
-            className="text-xl font-bold group-data-[focus-visible]:underline group-data-[hovered]:underline"
+            className={cn(
+              "text-xl font-bold group-data-[focus-visible]:underline group-data-[hovered]:underline",
+              "ring-offset-background transition-colors",
+              /* Focus Visible */
+              "data-[focus-visible]:outline-none data-[focus-visible]:ring-2 data-[focus-visible]:ring-blue-8",
+              /* Resets */
+              "focus-visible:outline-none"
+            )}
           >
             {item.data.title}
           </Link>
@@ -79,10 +86,7 @@ export function ArticleListMin({ posts, ...props }: ArticleListProps) {
             "focus-visible:outline-none"
           )}
         >
-          <Link
-            href={`/blog/${item.postSlug}`}
-            className="flex gap-1 font-medium"
-          >
+          <Link href={`/blog/${item.id}`} className="flex gap-1 font-medium">
             <ArrowRightIcon className="h-full w-4 min-w-4 pt-[4px]" />
             {item.data.title}
           </Link>
