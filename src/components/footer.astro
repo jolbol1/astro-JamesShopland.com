@@ -21,22 +21,22 @@ import IconWrapper from "@/components/icon-link.astro"
           <h4 class="text-lg font-medium uppercase text-blue-9">Follow me</h4>
           <h5 class="mb-2 mt-0 text-sm">Find me on any of these platforms.</h5>
           <div class="flex lg:mb-0">
-            <IconWrapper href={siteConfig.twitter}>
+            <IconWrapper href={siteConfig.twitter} label="Twitter">
               <Twitter class="size-6" />
             </IconWrapper>
-            <IconWrapper href={siteConfig.bluesky}>
+            <IconWrapper href={siteConfig.bluesky} label="BlueSky">
               <BlueSky class="size-6" />
             </IconWrapper>
-            <IconWrapper href={siteConfig.youtube}>
+            <IconWrapper href={siteConfig.youtube} label="YouTube">
               <YouTube class="size-6" />
             </IconWrapper>
-            <IconWrapper href={siteConfig.github}>
+            <IconWrapper href={siteConfig.github} label="GitHub">
               <Github class="size-6" />
             </IconWrapper>
-            <IconWrapper href={siteConfig.linkedin}>
+            <IconWrapper href={siteConfig.linkedin} label="LinkedIn">
               <LinkedIn class="size-6" />
             </IconWrapper>
-            <IconWrapper href={`mailto:${siteConfig.email}`}>
+            <IconWrapper href={`mailto:${siteConfig.email}`} label="Email">
               <Mail class="size-6" />
             </IconWrapper>
           </div>

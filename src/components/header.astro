@@ -81,6 +81,7 @@ import { Link } from "./ui/link"
             client:load
             className="text-blue-a-11 data-[hovered]:text-blue-a-12"
             target="_blank"
+            aria-label="GitHub"
             href="https://github.com/jolbol1"
             variant="ghost"
             size="icon"
@@ -93,22 +94,22 @@ import { Link } from "./ui/link"
           <GlowDiv className="block md:hidden">
             <MobileNav client:visible>
               <div slot="socials" class="flex flex-wrap px-2 lg:mb-0">
-                <IconLink href={siteConfig.twitter}>
+                <IconLink href={siteConfig.twitter} label="Twitter">
                   <Twitter class="size-6" />
                 </IconLink>
-                <IconLink href={siteConfig.bluesky}>
+                <IconLink href={siteConfig.bluesky} label="BlueSky">
                   <BlueSky class="size-6" />
                 </IconLink>
-                <IconLink href={siteConfig.youtube}>
+                <IconLink href={siteConfig.youtube} label="YouTube">
                   <YouTube class="size-6" />
                 </IconLink>
-                <IconLink href={siteConfig.github}>
+                <IconLink href={siteConfig.github} label="GitHub">
                   <Github class="size-6" />
                 </IconLink>
-                <IconLink href={siteConfig.linkedin}>
+                <IconLink href={siteConfig.linkedin} label="LinkedIn">
                   <LinkedIn class="size-6" />
                 </IconLink>
-                <IconLink href={`mailto:${siteConfig.email}`}>
+                <IconLink href={`mailto:${siteConfig.email}`} label="Email">
                   <Mail class="size-6" />
                 </IconLink>
               </div>

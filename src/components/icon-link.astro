@@ -3,12 +3,14 @@ import { Link } from "@/components/ui/link"
 
 interface Props {
   href: string
+  label: string
 }
 
-const { href } = Astro.props
+const { href, label } = Astro.props
 ---
 
 <Link
+  aria-label={label}
   href={href}
   className={"fill-gray-8 text-gray-8 data-[hovered]:fill-gray-a-12"}
   target="_blank"
