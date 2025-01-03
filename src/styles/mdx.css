@@ -16,3 +16,100 @@
 .expressive-code {
   @apply relative my-8 -ms-2 -me-2 sm:-ms-4 sm:-me-4;
 }
+
+.image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-container img {
+  margin-top: 2.25rem;
+  margin-bottom: 2.25rem;
+}
+
+.astro-code,
+.astro-code span {
+  font-family: "JetBrainsMono" !important;
+}
+
+/* Custom styles for heading anchor links. */
+.heading-wrapper {
+  --icon-size: 0.75em;
+  --icon-spacing: 0.25em;
+  line-height: 1.2;
+}
+
+.level-h1 {
+  font-size: 2.2em;
+}
+
+.level-h1 h1 {
+  font-size: 1em;
+}
+
+.level-h2 {
+  font-size: 2em;
+}
+
+.level-h2 h2 {
+  font-size: 1em;
+}
+
+.level-h3 {
+  font-size: 1.25em;
+}
+
+.level-h3 h3 {
+  font-size: 1em;
+}
+
+.level-h4 {
+  font-size: 1em;
+}
+
+.level-h4 h4 {
+  font-size: 1em;
+}
+
+/* Headings after non-headings have more spacing. */
+:not(.heading-wrapper) + .heading-wrapper:not(.not-content *) {
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+}
+
+.heading-wrapper > :first-child {
+  margin-inline-end: calc(var(--icon-size) + var(--icon-spacing));
+  display: inline;
+}
+
+.anchor-link {
+  margin-inline-start: calc(-1 * (var(--icon-size)));
+  color: currentColor;
+}
+.anchor-link:hover,
+.anchor-link:focus {
+  color: currentColor;
+}
+.heading-wrapper svg {
+  display: inline;
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+/* Prevent double or triple clicks from potentially selecting the anchor link a11y text. */
+.anchor-link .sr-only {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+@media (hover: hover) {
+  .anchor-link {
+    opacity: 0;
+  }
+}
+.heading-wrapper:hover > .anchor-link,
+.anchor-link:focus {
+  opacity: 1;
+}

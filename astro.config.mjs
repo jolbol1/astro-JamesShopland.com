@@ -9,7 +9,11 @@ import tailwind from "@astrojs/tailwind"
 import vercel from "@astrojs/vercel"
 import remarkEmbedder from "@remark-embedder/core"
 import expressiveCode from "astro-expressive-code"
+import { rehypeAccessibleEmojis } from "rehype-accessible-emojis"
+import rehypeAutolinkHeadings from "rehype-autolink-headings"
+import rehypeSlug from "rehype-slug"
 
+import { autolinkConfig } from "./src/lib/headings"
 import { remarkOembedOptions } from "./src/lib/oembed"
 
 // https://astro.build/config
@@ -21,6 +25,12 @@ export default defineConfig({
   markdown: {
     // @ts-expect-error oembed error
     remarkPlugins: [[remarkEmbedder.default, remarkOembedOptions]],
+    rehypePlugins: [
+      rehypeSlug,
+      // @ts-expect-error rehypeAccessibleEmojis error
+      rehypeAccessibleEmojis,
+      [rehypeAutolinkHeadings, autolinkConfig],
+    ],
   },
   integrations: [
     expressiveCode({
