@@ -38,6 +38,9 @@ importers:
       react:
         specifier: ^19.0.0
         version: 19.0.0
+      react-compiler-runtime:
+        specifier: 19.0.0-beta-55955c9-20241229
+        version: 19.0.0-beta-55955c9-20241229(react@19.0.0)
       react-dom:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
@@ -2617,6 +2620,11 @@ packages:
 
   radix3@1.1.2:
     resolution: {integrity: sha512-b484I/7b8rDEdSDKckSSBA8knMpcdsXudlE/LNL639wFoHKwLbEkQFZHWEYwDC0wa0FKUcCY+GAF73Z7wxNVFA==}
+
+  react-compiler-runtime@19.0.0-beta-55955c9-20241229:
+    resolution: {integrity: sha512-I8niUyydqnPVMjqsOEfFwiRlWbndSjgwGhbm5GZuKev3b0HAcUAqAoHNIpp0XSHInlwfn4Zvtbva5TLupEOw+Q==}
+    peerDependencies:
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0 || ^0.0.0-experimental
 
   react-dom@19.0.0:
     resolution: {integrity: sha512-4GV5sHFG0e/0AD4X+ySy6UJd3jVl1iNsNHdpad0qhABJ11twS3TTBnseqsKurKcsNqCEFeGL3uLpVChpIO3QfQ==}
@@ -6432,6 +6440,10 @@ snapshots:
   queue-microtask@1.2.3: {}
 
   radix3@1.1.2: {}
+
+  react-compiler-runtime@19.0.0-beta-55955c9-20241229(react@19.0.0):
+    dependencies:
+      react: 19.0.0
 
   react-dom@19.0.0(react@19.0.0):
     dependencies:
