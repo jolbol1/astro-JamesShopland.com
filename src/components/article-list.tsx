@@ -1,4 +1,3 @@
-import type { InferEntrySchema, RenderedContent } from "astro:content"
 import { ArrowRightIcon } from "lucide-react"
 import {
   GridList,
@@ -7,18 +6,9 @@ import {
   type GridListProps,
 } from "react-aria-components"
 
-import { cn } from "@/lib/utils"
+import type { Post } from "@/types/types"
 
-type Post = {
-  id: string
-  body?: string
-  collection: "blog"
-  data: InferEntrySchema<"blog">
-  rendered?: RenderedContent
-  filePath?: string
-  readingTime?: string
-  formattedDate?: string
-}
+import { cn } from "@/lib/utils"
 
 interface ArticleListProps extends GridListProps<Post> {
   posts: Post[]
@@ -34,7 +24,7 @@ export function ArticleList({ posts, ...props }: ArticleListProps) {
     >
       {(item) => (
         <GridListItem
-          href={`/blog/${item.id}/`}
+          href={`/blog/${item.postSlug}/`}
           textValue={[item.data.title, item.data.date, item.data.summary].join(
             "\n"
           )}
@@ -50,7 +40,7 @@ export function ArticleList({ posts, ...props }: ArticleListProps) {
           )}
         >
           <Link
-            href={`/blog/${item.id}/`}
+            href={`/blog/${item.postSlug}/`}
             className="text-xl font-bold group-data-[focus-visible]:underline group-data-[hovered]:underline"
           >
             {item.data.title}
@@ -76,7 +66,7 @@ export function ArticleListMin({ posts, ...props }: ArticleListProps) {
     >
       {(item) => (
         <GridListItem
-          href={`/blog/${item.id}`}
+          href={`/blog/${item.postSlug}`}
           textValue={item.data.title}
           className={cn(
             "group gap-4 p-0",
@@ -89,7 +79,10 @@ export function ArticleListMin({ posts, ...props }: ArticleListProps) {
             "focus-visible:outline-none"
           )}
         >
-          <Link href={`/blog/${item.id}`} className="flex gap-1 font-medium">
+          <Link
+            href={`/blog/${item.postSlug}`}
+            className="flex gap-1 font-medium"
+          >
             <ArrowRightIcon className="h-full w-4 min-w-4 pt-[4px]" />
             {item.data.title}
           </Link>
