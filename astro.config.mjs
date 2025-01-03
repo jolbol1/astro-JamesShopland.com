@@ -16,7 +16,13 @@ import expressiveCode from "astro-expressive-code";
 // https://astro.build/config
 export default defineConfig({
   site: "https://jamesshopland.com",
-  integrations: [expressiveCode(), mdx(), react(), tailwind(), sitemap()],
+  integrations: [
+    expressiveCode(),
+    mdx(),
+    react(),
+    tailwind({ applyBaseStyles: false }),
+    sitemap(),
+  ],
   adapter: vercel({
     imageService: true,
     imagesConfig: {
