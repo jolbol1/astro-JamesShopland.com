@@ -8,6 +8,7 @@ import YouTube from "@/assets/icons/youtube.svg"
 import avatar from "@/assets/images/avatar.jpg"
 import Layout from "@/layouts/Layout.astro"
 import { Image } from "astro:assets"
+import { siteConfig } from "site-config"
 
 import { Link } from "@/components/ui/link"
 import { Separator } from "@/components/ui/separator"
@@ -43,22 +44,22 @@ import IconLink from "@/components/icon-link.astro"
         </h2>
         <div class="text-gray-a-11">Developer Advocate</div>
         <div class="flex space-x-3 pt-6">
-          <IconLink href="https://twitter.com/your-handle">
+          <IconLink href={siteConfig.twitter}>
             <Twitter class="size-6" />
           </IconLink>
-          <IconLink href="https://bsky.app/profile/your-profile">
+          <IconLink href={siteConfig.bluesky}>
             <BlueSky class="size-6" />
           </IconLink>
-          <IconLink href="https://youtube.com/@your-channel">
+          <IconLink href={siteConfig.youtube}>
             <YouTube class="size-6" />
           </IconLink>
-          <IconLink href="https://github.com/jolbol1">
+          <IconLink href={siteConfig.github}>
             <Github class="size-6" />
           </IconLink>
-          <IconLink href="https://linkedin.com/in/your-profile">
+          <IconLink href={siteConfig.linkedin}>
             <LinkedIn class="size-6" />
           </IconLink>
-          <IconLink href="mailto:your-email@example.com">
+          <IconLink href={`mailto:${siteConfig.email}`}>
             <Mail class="size-6" />
           </IconLink>
         </div>

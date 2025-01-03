@@ -5,6 +5,7 @@ import LinkedIn from "@/assets/icons/linkedin.svg"
 import Mail from "@/assets/icons/mail.svg"
 import Twitter from "@/assets/icons/twitter.svg"
 import YouTube from "@/assets/icons/youtube.svg"
+import { siteConfig } from "site-config"
 
 import { Link } from "@/components/ui/link"
 import IconWrapper from "@/components/icon-link.astro"
@@ -20,22 +21,22 @@ import IconWrapper from "@/components/icon-link.astro"
           <h4 class="text-lg font-medium uppercase text-blue-9">Follow me</h4>
           <h5 class="mb-2 mt-0 text-sm">Find me on any of these platforms.</h5>
           <div class="flex lg:mb-0">
-            <IconWrapper href="https://twitter.com/your-handle">
+            <IconWrapper href={siteConfig.twitter}>
               <Twitter class="size-6" />
             </IconWrapper>
-            <IconWrapper href="https://bsky.app/profile/your-profile">
+            <IconWrapper href={siteConfig.bluesky}>
               <BlueSky class="size-6" />
             </IconWrapper>
-            <IconWrapper href="https://youtube.com/@your-channel">
+            <IconWrapper href={siteConfig.youtube}>
               <YouTube class="size-6" />
             </IconWrapper>
-            <IconWrapper href="https://github.com/jolbol1">
+            <IconWrapper href={siteConfig.github}>
               <Github class="size-6" />
             </IconWrapper>
-            <IconWrapper href="https://linkedin.com/in/your-profile">
+            <IconWrapper href={siteConfig.linkedin}>
               <LinkedIn class="size-6" />
             </IconWrapper>
-            <IconWrapper href="mailto:your-email@example.com">
+            <IconWrapper href={`mailto:${siteConfig.email}`}>
               <Mail class="size-6" />
             </IconWrapper>
           </div>
