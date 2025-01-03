@@ -12,8 +12,8 @@ import expressiveCode from "astro-expressive-code"
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeSlug from "rehype-slug"
-import { CopyFilesPlugin } from "sitemap-copy"
 
+import { CopyFilesPlugin } from "./sitemap-copy"
 import { autolinkConfig } from "./src/lib/headings"
 import { remarkOembedOptions } from "./src/lib/oembed"
 
