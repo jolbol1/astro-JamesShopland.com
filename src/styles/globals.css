@@ -417,3 +417,37 @@
 html {
   scroll-padding-top: 6rem;
 }
+
+.underlined {
+  position: relative;
+  white-space: nowrap;
+}
+
+.underlined,
+.underlined:focus {
+  text-decoration: none !important;
+}
+
+.underlined:focus {
+  outline: none;
+}
+
+.underlined:after {
+  bottom: -4px;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 0;
+  position: absolute;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+  width: 100%;
+}
+
+.active.underlined:after,
+.underlined:focus:after,
+.underlined:hover:after {
+  background-color: currentColor;
+  transform: scaleX(1);
+}
