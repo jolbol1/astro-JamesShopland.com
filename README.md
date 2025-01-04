@@ -5,7 +5,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![Vercel][vercel-badge]](https://astro-JamesShopland.com)
+[![Vercel][vercel-badge]](https://JamesShopland.com)
 
 <!-- PROJECT LOGO -->
 <br />
