@@ -1,36 +1,65 @@
-# Astro Starter Kit: Basics
+<div id="top"></div>
 
-```sh
-npm create astro@latest -- --template basics
-```
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![Vercel][vercel-badge]](https://astro-JamesShopland.com)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+<h3 align="center">JamesShopland.com</h3>
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+  <p align="center">
+    My personal website. Currently built using Astro. Playground for me to learn new things.
+    <br />
+    <br />
+    <a href="https://astro-JamesShopland.com">View Site</a>
+  </p>
+</div>
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+<!-- ABOUT THE PROJECT -->
 
-## 🚀 Project Structure
+## About The Project
 
-Inside of your Astro project, you'll see the following folders and files:
+My personal site hosting my blog posts. Used as a place to learn new frameworks and more, from time to time it may completely change as I try out new things. Currently using Astro, React and TypeScript.
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+The site is deployed via Vercel.
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-## 🧞 Commands
+### Built With
+
+- [![Astro][astro-badge]][astro-url]
+- [![Vite][vite-badge]][vite-url]
+- [![React][react-badge]][react-url]
+- [![Typescript][typescript-badge]][typescript-url]
+- [![Tailwind][tailwind-badge]][tailwind-url]
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- GETTING STARTED -->
+
+## Getting Started
+
+To get a local copy up and running follow these simple example steps.
+
+### Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/jolbol1/jolbol1.github.io.git
+   ```
+2. Install NPM packages
+   ```sh
+   pnpm install
+   ```
+3. Spin it up!
+   ```sh
+   pnpm run dev
+   ```
 
 All commands are run from the root of the project, from a terminal:
 
@@ -43,6 +72,37 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+<!-- LICENSE -->
+
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/jolbol1/astro-JamesShopland.com.svg?style=for-the-badge
+[contributors-url]: https://github.com/jolbol1/astro-JamesShopland.com/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/jolbol1/astro-JamesShopland.com.svg?style=for-the-badge
+[forks-url]: https://github.com/jolbol1/astro-JamesShopland.com/network/members
+[stars-shield]: https://img.shields.io/github/stars/jolbol1/astro-JamesShopland.com.svg?style=for-the-badge
+[stars-url]: https://github.com/jolbol1/astro-JamesShopland.com/stargazers
+[issues-shield]: https://img.shields.io/github/issues/jolbol1/astro-JamesShopland.com.svg?style=for-the-badge
+[issues-url]: https://github.com/jolbol1/astro-JamesShopland.com/issues
+[license-shield]: https://img.shields.io/github/license/jolbol1/astro-JamesShopland.com.svg?style=for-the-badge
+[license-url]: https://github.com/jolbol1/astro-JamesShopland.com/blob/master/LICENSE.txt
+[typescript-badge]: https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white
+[typescript-url]: https://www.typescriptlang.org/
+[tailwind-badge]: https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white
+[tailwind-url]: https://tailwindcss.com/
+[vite-badge]: https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white
+[vite-url]: https://vitejs.dev/
+[vercel-badge]: https://img.shields.io/github/deployments/jolbol1/astro-JamesShopland.com/production?label=Vercel&logo=vercel&style=for-the-badge
+[astro-badge]: https://img.shields.io/badge/astro-%23f1413d.svg?style=for-the-badge&logo=astro&logoColor=white
+[astro-url]: https://astro.build/
+[react-badge]: https://img.shields.io/badge/react-%2361DAFB.svg?style=for-the-badge&logo=react&logoColor=white
+[react-url]: https://react.dev/
