@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 export const components: MDXComponents = {
   h1: ({ className, ...props }) => (
     <h1
+      data-heading-toc
       className={cn(
         "text-pretty break-words text-4xl font-extrabold tracking-tight lg:text-5xl",
         className
@@ -16,6 +17,7 @@ export const components: MDXComponents = {
   ),
   h2: ({ className, ...props }) => (
     <h2
+      data-heading-toc
       className={cn(
         " text-pretty break-words text-3xl font-semibold tracking-tight text-blue-11 first:mt-0",
         className

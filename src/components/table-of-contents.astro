@@ -1,22 +1,25 @@
 ---
-import type { MarkdownHeading } from "astro";
+import type { MarkdownHeading } from "astro"
 
 interface Props {
-  headings: MarkdownHeading[];
+  headings: MarkdownHeading[]
 }
 
-const { headings } = Astro.props;
+const { headings } = Astro.props
 
-const filteredHeadings = headings.filter((heading) => heading.depth <= 2);
+const filteredHeadings = headings.filter((heading) => heading.depth <= 2)
 ---
 
 <nav class="w-64">
   <h2 class="mb-3 uppercase">Table of Contents</h2>
-  <nav class="text-muted-foreground flex flex-col gap-2">
-    <a href="#introduction">Introduction</a>
+  <nav
+    class="text-muted-foreground flex flex-col gap-2 [&_a[data-heading-active]]:text-blue-a-8"
+  >
+    <a href="#introduction" data-heading-link>Introduction</a>
     {
       filteredHeadings.map((heading) => (
         <a
+          data-heading-link
           class={`${heading.depth === 2 ? "text-base" : "pl-3 text-sm"}`}
           href={`#${heading.slug}`}
         >
@@ -26,3 +29,61 @@ const filteredHeadings = headings.filter((heading) => heading.depth <= 2);
     }
   </nav>
 </nav>
+
+<script>
+  // https://decipher.dev/30-seconds-of-typescript/docs/debounce/
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+  const debounce = (fn: Function, ms = 300) => {
+    let timeoutId: ReturnType<typeof setTimeout>
+    return function (this: any, ...args: any[]) {
+      clearTimeout(timeoutId)
+      timeoutId = setTimeout(() => fn.apply(this, args), ms)
+    }
+  }
+
+  const tocLinks = document.querySelectorAll("[data-heading-link]")
+  const links = document.querySelectorAll("[data-heading-toc]")
+
+  const onScroll = debounce(() => {
+    const boundingBoxes = Array.from(links).map((link) => {
+      return {
+        id: link.id,
+        boundingBox: link.getBoundingClientRect(),
+      }
+    })
+
+    const OFFSET = 100
+    let firstViewportHeading = boundingBoxes.find(({ boundingBox }) => {
+      return boundingBox.bottom > OFFSET && boundingBox.top < window.innerHeight
+    })
+
+    if (!firstViewportHeading) {
+      const reversedBoxes = [...boundingBoxes].reverse()
+
+      firstViewportHeading = reversedBoxes.find(({ boundingBox }) => {
+        return boundingBox.bottom < OFFSET
+      })
+    }
+
+    if (!firstViewportHeading) {
+      tocLinks.forEach((link) => {
+        if (link.getAttribute("href")?.slice(1) === "introduction") {
+          link.setAttribute("data-heading-active", "true")
+        } else {
+          link.removeAttribute("data-heading-active")
+        }
+      })
+    } else {
+      tocLinks.forEach((link) => {
+        if (link.getAttribute("href")?.slice(1) === firstViewportHeading.id) {
+          link.setAttribute("data-heading-active", "true")
+        } else {
+          link.removeAttribute("data-heading-active")
+        }
+      })
+    }
+  })
+
+  onScroll()
+  window.addEventListener("scroll", onScroll)
+</script>

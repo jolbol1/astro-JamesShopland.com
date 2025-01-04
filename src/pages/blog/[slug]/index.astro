@@ -30,7 +30,7 @@ const { Content, headings } = await render(post)
   tags={post.data.tags}
 >
   <BlogLayout post={post} headings={headings} {...post.data}>
-    <a id="introduction" class="toc-link scroll-mt-40">
+    <a id="introduction">
       <span class="absolute size-px overflow-hidden">Introduction</span>
     </a>
     <Content components={components} />
