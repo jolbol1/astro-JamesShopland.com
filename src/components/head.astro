@@ -36,22 +36,14 @@ const socialImageURL = articleDate
 ---
 
 <!-- Global Metadata -->
+<meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="generator" content={Astro.generator} />
-<link rel="sitemap" href="/sitemap-index.xml" />
-
-<!-- Favicons -->
-<link rel="icon" href="/favicon.ico" sizes="32x32" />
-<link rel="icon" href={faviconSvg.src} type="image/svg+xml" />
-<link rel="apple-touch-icon" href={appleTouchIcon.src} />
-<link rel="manifest" href="/manifest.json" />
 
 <!-- SEO -->
 <SEO
   titleTemplate={`%s | ${siteConfig.title}`}
   title={title}
   description={description}
-  charset="utf-8"
   openGraph={{
     basic: {
       title: title,
@@ -90,14 +82,6 @@ const socialImageURL = articleDate
     image: socialImageURL,
     imageAlt: title,
   }}
-/>
-
-<!-- RSS auto-discovery -->
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  title={siteConfig.title}
-  href="/rss.xml"
 />
 
 <!-- Fonts -->
@@ -139,4 +123,21 @@ const socialImageURL = articleDate
       fallback: "monospace",
     },
   ]}
+/>
+
+<meta name="generator" content={Astro.generator} />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<!-- Favicons -->
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href={faviconSvg.src} type="image/svg+xml" />
+<link rel="apple-touch-icon" href={appleTouchIcon.src} />
+<link rel="manifest" href="/manifest.json" />
+
+<!-- RSS auto-discovery -->
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={siteConfig.title}
+  href="/rss.xml"
 />
