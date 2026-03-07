@@ -1,7 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config"
 
-import db from "@astrojs/db"
 import mdx from "@astrojs/mdx"
 import react from "@astrojs/react"
 import sitemap from "@astrojs/sitemap"
@@ -42,7 +41,6 @@ export default defineConfig({
     mdx(),
     react(),
     sitemap(),
-    db(),
     CopyFilesPlugin(),
   ],
   vite: {

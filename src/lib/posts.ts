@@ -1,5 +1,4 @@
 import { getCollection } from "astro:content"
-import { blogViews, db, eq } from "astro:db"
 import kebabCase from "lodash.kebabcase"
 
 import type { Post, Tag } from "@/types/types"
@@ -10,9 +9,7 @@ import { getReadingTime } from "./reading-time"
 export async function getPosts(
   limit?: number,
   includeDrafts: boolean = false,
-  tagSlug?: string,
-  includeViewCount: boolean = false,
-  sortBy: "date" | "views" = "date"
+  tagSlug?: string
 ) {
   const posts = (await getCollection("blog"))
     .filter((post) => (includeDrafts ? true : post.data.draft !== true))
@@ -23,17 +20,9 @@ export async function getPosts(
       )
     })
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-    .slice(0, includeViewCount ? undefined : limit)
+    .slice(0, limit)
     .map(async (post) => {
       const postSLug = kebabCase(post.id.toLowerCase())
-      let viewCount = 0
-      if (includeViewCount) {
-        const count = await db
-          .select()
-          .from(blogViews)
-          .where(eq(blogViews.slug, post.id))
-        viewCount = count.length > 0 ? count[0].count : 0
-      }
 
       return {
         ...post,
@@ -47,17 +36,11 @@ export async function getPosts(
           tag: tag.toLowerCase(),
           slug: kebabCase(tag.toLowerCase()),
         })),
-        viewCount: includeViewCount ? viewCount : 0,
       }
     })
 
   const postsNormal = await Promise.all(posts)
-
-  if (sortBy === "views") {
-    postsNormal.sort((a, b) => b.viewCount - a.viewCount)
-  }
-
-  return postsNormal.slice(0, limit) as Post[]
+  return postsNormal as Post[]
 }
 
 export async function getTags(limit?: number): Promise<Tag[]> {

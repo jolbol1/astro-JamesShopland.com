@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "node ./scripts/build.mjs",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
     "format:write": "prettier --write .",
@@ -13,7 +13,6 @@
     "lint:check": "eslint ."
   },
   "dependencies": {
-    "@astrojs/db": "^0.19.0",
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/react": "^4.4.2",
     "@astrojs/rss": "^4.0.15",
@@ -60,7 +59,6 @@
     "@typescript-eslint/parser": "^8.56.1",
     "eslint": "^10.0.3",
     "eslint-plugin-astro": "^1.6.0",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
     "mdast-util-from-markdown": "^2.0.3",
     "mdast-util-to-string": "^4.0.0",
     "prettier": "^3.8.1",
