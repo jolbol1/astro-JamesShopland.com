@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import animate from "tailwindcss-animate"
-import { fontFamily } from "tailwindcss/defaultTheme"
+import defaultTheme from "tailwindcss/defaultTheme"
 
 export default {
   darkMode: ["class"],
@@ -8,8 +8,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", ...fontFamily.sans],
-        mono: ["JetBrainsMono", ...fontFamily.mono],
+        sans: ["Inter", ...defaultTheme.fontFamily.sans],
+        mono: ["JetBrainsMono", ...defaultTheme.fontFamily.mono],
       },
       borderRadius: {
         lg: "var(--radius)",

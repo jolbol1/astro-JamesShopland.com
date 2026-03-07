@@ -5,7 +5,7 @@ import db from "@astrojs/db"
 import mdx from "@astrojs/mdx"
 import react from "@astrojs/react"
 import sitemap from "@astrojs/sitemap"
-import tailwind from "@astrojs/tailwind"
+import tailwindcss from "@tailwindcss/vite"
 import vercel from "@astrojs/vercel"
 import remarkEmbedder from "@remark-embedder/core"
 import expressiveCode from "astro-expressive-code"
@@ -20,9 +20,8 @@ import { remarkOembedOptions } from "./src/lib/oembed"
 // https://astro.build/config
 export default defineConfig({
   site: "https://jamesshopland.com",
-  experimental: {
-    responsiveImages: true,
-    svg: true,
+  image: {
+    responsiveStyles: true,
   },
   markdown: {
     // @ts-expect-error oembed error
@@ -42,11 +41,13 @@ export default defineConfig({
     }),
     mdx(),
     react(),
-    tailwind({ applyBaseStyles: false }),
     sitemap(),
     db(),
     CopyFilesPlugin(),
   ],
+  vite: {
+    plugins: [tailwindcss()],
+  },
   adapter: vercel({
     imageService: true,
     devImageService: "sharp",

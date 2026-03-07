@@ -1,20 +1,34 @@
 .embed {
-  @apply relative my-8 -ms-2 -me-2 sm:-ms-4 sm:-me-4;
+  position: relative;
+  margin-block: 2rem;
+  margin-inline: -0.5rem;
 }
 
 .embed > div {
-  @apply h-0;
+  height: 0;
 }
 
 .embed > div > iframe {
-  @apply top-0 left-0 absolute border-none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: none;
   height: 100% !important;
   width: 100% !important;
   border-radius: 0 !important;
 }
 
 .expressive-code {
-  @apply relative my-8 -ms-2 -me-2 sm:-ms-4 sm:-me-4;
+  position: relative;
+  margin-block: 2rem;
+  margin-inline: -0.5rem;
+}
+
+@media (min-width: 640px) {
+  .embed,
+  .expressive-code {
+    margin-inline: -1rem;
+  }
 }
 
 .image-container {

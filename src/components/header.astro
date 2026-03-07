@@ -7,7 +7,6 @@ import Twitter from "@/assets/icons/twitter.svg"
 import YouTube from "@/assets/icons/youtube.svg"
 import LogoImage from "@/assets/images/logo.webp"
 import { Image } from "astro:assets"
-import { GithubIcon } from "lucide-react"
 import { siteConfig } from "site-config"
 
 import { DarkModeButton } from "@/components/dark-mode-button.tsx"
@@ -86,7 +85,7 @@ import { Link } from "./ui/link"
             variant="ghost"
             size="icon"
           >
-            <GithubIcon className="size-6" />
+            <Github class="size-6" />
           </Link>
           <GlowDiv>
             <DarkModeButton client:load />
