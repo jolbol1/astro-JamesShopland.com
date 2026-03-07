@@ -16,7 +16,7 @@ function handleEmbedderHtml(html: GottenHTML, info: TransformerInfo) {
     // height will be relative to that width with a good aspect ratio
     return makeEmbed(html, "youtube")
   }
-  if (url.hostname.includes("codesandbox.io")) {
+  if (url.hostname === "codesandbox.io" || url.hostname.endsWith(".codesandbox.io")) {
     return makeEmbed(html, "codesandbox", "80%")
   }
   return html
