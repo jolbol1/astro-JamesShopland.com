@@ -33,15 +33,17 @@ export const generateOG = async ({ title }: { title: string }) => {
         }}
       >
         <div
-          tw="flex leading-[1.1] font-bold tracking-tighter items-center"
+          tw="flex font-bold items-center"
           style={{
             fontFamily: "Inter",
             fontWeight: "bolder",
+            letterSpacing: "-0.05em",
+            lineHeight: 1.1,
             marginLeft: "-3px",
             fontSize: "32px",
           }}
         >
-          <img width="64" height="64" src={image1Base64} />
+          <img width={64} height={64} src={image1Base64} />
           <h1 tw="pl-4">James Shopland</h1>
         </div>
 
@@ -53,10 +55,12 @@ export const generateOG = async ({ title }: { title: string }) => {
             BLOG POST
           </div>
           <div
-            tw="flex leading-[1.1] text-[80px] font-bold tracking-tighter"
+            tw="flex text-[80px] font-bold"
             style={{
               fontFamily: "Inter",
               fontWeight: "bolder",
+              letterSpacing: "-0.05em",
+              lineHeight: 1.1,
               marginLeft: "-3px",
               fontSize,
             }}
@@ -75,7 +79,7 @@ export const generateOG = async ({ title }: { title: string }) => {
             tw="flex items-center text-xl"
             style={{ fontFamily: "Inter", fontWeight: "normal" }}
           >
-            <img height="86" src={image2Base64} />
+            <img height={86} src={image2Base64} />
           </div>
         </div>
       </div>

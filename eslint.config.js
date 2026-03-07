@@ -1,10 +1,8 @@
 import eslint from "@eslint/js";
 import eslintPluginAstro from "eslint-plugin-astro";
 import tseslint from "typescript-eslint";
-import tailwind from "eslint-plugin-tailwindcss";
 
-
-export default tseslint.config(
+export default [
   {
     ignores: [
       "**/dist",
@@ -28,18 +26,5 @@ export default tseslint.config(
   },
 
   // Astro
-  ...eslintPluginAstro.configs.recommended,
-
-  //Tailwind
-  ...tailwind.configs["flat/recommended"],
-  {
-    rules: {
-      "tailwindcss/no-custom-classname": "off",
-    },
-    settings: {
-      tailwindcss: {
-        callees: ["cn"],
-      },
-    },
-  }
-);
+  ...eslintPluginAstro.configs.recommended
+];

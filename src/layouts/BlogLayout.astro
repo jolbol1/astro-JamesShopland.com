@@ -6,7 +6,6 @@ import type { Post } from "@/types/types"
 import "@/styles/mdx.css"
 
 import TableOfContents from "@/components/table-of-contents.astro"
-import ViewCount from "@/components/view-count.astro"
 
 type Props = CollectionEntry<"blog">["data"] & {
   headings: import("astro").MarkdownHeading[]
@@ -52,17 +51,6 @@ const { post, headings } = Astro.props
       style="grid-column: 3; grid-row: 1 / 200"
     >
       <TableOfContents headings={headings} />
-
-      <ViewCount server:defer slug={post.postSlug} />
     </div>
   </div>
-  <div class="flex w-full justify-center [@media(min-width:1070px)]:hidden">
-    <ViewCount server:defer slug={post.postSlug} />
-  </div>
-
-  <script>
-    import { actions } from "astro:actions"
-
-    actions.pageView({ slug: window.location.pathname.split("/")[2] })
-  </script>
 </article>
