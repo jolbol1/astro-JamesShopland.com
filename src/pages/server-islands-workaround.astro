@@ -1,0 +1,18 @@
+---
+// Astro 5 edge-case workaround:
+// keep one non-prerendered route so adapters generate the SSR entrypoint
+// required by `server:defer` server islands in otherwise static projects.
+// https://github.com/withastro/astro/issues/12744
+export const prerender = false
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Internal</title>
+  </head>
+  <body></body>
+</html>

@@ -1,0 +1,12 @@
+---
+import { ChannelCards } from './channel-cards'
+import { channels } from "./channels"
+
+interface Props {
+  "aria-labelledby"?: string
+}
+
+const { "aria-labelledby": ariaLabelledby } = Astro.props as Props
+---
+
+<ChannelCards channels={channels} aria-labelledby={ariaLabelledby} />

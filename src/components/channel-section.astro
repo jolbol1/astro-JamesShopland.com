@@ -1,22 +1,6 @@
 ---
-import { ChannelCards } from "./channel-cards"
-
-const channels = [
-  {
-    name: "Better Stack",
-    subscribers: "16K",
-    id: "@betterstack",
-    image: "/betterstack.jpg",
-    url: "https://www.youtube.com/@betterstack",
-  },
-  {
-    name: "Jolly Coding",
-    subscribers: "6K",
-    id: "@jollycoding",
-    image: "/jollycoding.jpg",
-    url: "https://www.youtube.com/@jollycoding",
-  },
-]
+import ChannelCardsFallback from "./channel-cards-fallback.astro"
+import ChannelCardsIsland from "./channel-cards-island.astro"
 ---
 
 <div class="mx-auto mt-12 max-w-6xl px-4 sm:px-8">
@@ -26,9 +10,14 @@ const channels = [
   >
     Channels
   </h2>
-  <ChannelCards
-    client:load
+  <ChannelCardsIsland
+    server:defer
     aria-labelledby="channels-heading"
-    channels={channels}
-  />
+  >
+    <ChannelCardsFallback
+      slot="fallback"
+      aria-labelledby="channels-heading"
+    />
+  </ChannelCardsIsland>
+
 </div>
