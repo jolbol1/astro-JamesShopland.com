@@ -7,14 +7,7 @@ import {
 import { cn } from "@/lib/utils"
 
 import { Link } from "@/components/ui/link"
-
-interface Channel {
-  id: string
-  name: string
-  subscribers: string
-  image: string
-  url: string
-}
+import type { Channel } from "./channels"
 
 interface ChannelCardsProps extends AriaGridListProps<Channel> {
   channels: Channel[]
@@ -52,9 +45,13 @@ export function ChannelCards({ channels, ...props }: ChannelCardsProps) {
               <div>
                 <p className="text-sm font-medium leading-none">{item.name}</p>
                 <p className="text-sm text-gray-a-11">{item.id}</p>
-                <p className="mt-1 text-xs text-gray-a-11">
-                  {item.subscribers} Subscribers
-                </p>
+                <div className="mt-1 min-h-4">
+                  {item.subscribers ? (
+                    <p className="text-xs text-gray-a-11">
+                      {item.subscribers} Subscribers
+                    </p>
+                  ) : null}
+                </div>
               </div>
             </div>
             <Link

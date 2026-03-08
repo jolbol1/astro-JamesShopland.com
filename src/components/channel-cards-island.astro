@@ -1,0 +1,80 @@
+---
+import { ChannelCards } from "./channel-cards"
+import { channels } from "./channels"
+
+interface Props {
+  "aria-labelledby"?: string
+}
+
+const { "aria-labelledby": ariaLabelledby } = Astro.props as Props
+
+Astro.response.headers.set(
+  "Cache-Control",
+  "s-maxage=86400, stale-while-revalidate"
+)
+
+const apiBaseUrl = import.meta.env.API_URL?.replace(/\/+$/, "")
+const apiKey = import.meta.env.API_KEY ?? ""
+const subscriberCountFormatter = new Intl.NumberFormat("en", {
+  notation: "compact",
+  maximumFractionDigits: 1,
+})
+
+async function getSubscriberCount(channelHandle: string) {
+  if (!apiBaseUrl) {
+    console.log("No API base URL")
+    return null
+  }
+
+  const response = await fetch(
+    `${apiBaseUrl}/channels/${encodeURIComponent(channelHandle)}`,
+    {
+      credentials: "include",
+      headers: {
+        "x-api-key": apiKey,
+      },
+    }
+  )
+
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch subscriber count for ${channelHandle}: ${response.status}`
+    )
+  }
+
+  const data = await response.json()
+  const subscriberCount =
+    typeof data?.channelStats?.subscriberCount === "number"
+      ? data.channelStats.subscriberCount
+      : Number(data?.channelStats?.subscriberCount)
+
+  if (!Number.isFinite(subscriberCount)) {
+    throw new Error(`Invalid subscriber count for ${channelHandle}`)
+  }
+
+  return subscriberCountFormatter.format(subscriberCount)
+}
+
+const channelsWithLiveCounts = await Promise.all(
+  channels.map(async (channel) => {
+    try {
+      return {
+        ...channel,
+        subscribers:
+          (await getSubscriberCount(channel.id)) ?? channel.subscribers,
+      }
+    } catch (error) {
+      console.error(error)
+
+      return channel
+    }
+  })
+)
+
+---
+
+<ChannelCards
+  client:load
+  aria-labelledby={ariaLabelledby}
+  channels={channelsWithLiveCounts}
+/>
