@@ -1,10 +1,49 @@
 version: 2
 updates:
-  - package-ecosystem: npm
-    directory: /
+  - package-ecosystem: bun
     schedule:
       interval: daily
     open-pull-requests-limit: 20
-    commit-message:
-      prefix: "⬆️"
-      include: scope
+    directory: /
+    groups:
+      app-framework:
+        patterns:
+          - "astro"
+          - "@astrojs/*"
+          - "astro-*"
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
+          - "react-*"
+          - "@vercel/*"
+      ui:
+        patterns:
+          - "tailwindcss"
+          - "@tailwindcss/*"
+          - "tailwind-*"
+          - "class-variance-authority"
+          - "clsx"
+          - "lucide-react"
+          - "react-aria-components"
+          - "mdx"
+          - "@remark-embedder/*"
+          - "mdast-util-*"
+          - "rehype-*"
+          - "hast*"
+          - "reading-time"
+      tooling:
+        patterns:
+          - "eslint"
+          - "eslint-*"
+          - "@eslint/*"
+          - "@typescript-eslint/*"
+          - "typescript-eslint"
+          - "prettier"
+          - "prettier-*"
+          - "@ianvs/prettier-plugin-sort-imports"
+      other:
+        patterns:
+          - "*"
+
+

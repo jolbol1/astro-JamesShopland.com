@@ -52,25 +52,25 @@ To get a local copy up and running follow these simple example steps.
    ```sh
    git clone https://github.com/jolbol1/jolbol1.github.io.git
    ```
-2. Install NPM packages
+2. Install dependencies with Bun
    ```sh
-   pnpm install
+   bun install
    ```
 3. Spin it up!
    ```sh
-   pnpm run dev
+   bun dev
    ```
 
 All commands are run from the root of the project, from a terminal:
 
 | Command                   | Action                                           |
 | :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| `bun install`             | Installs dependencies                            |
+| `bun dev`                 | Starts local dev server at `localhost:4321`      |
+| `bun build`               | Build your production site to `./dist/`          |
+| `bun preview`             | Preview your build locally, before deploying     |
+| `bun astro ...`           | Run CLI commands like `astro add`, `astro check` |
+| `bun astro --help`        | Get help using the Astro CLI                     |
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
