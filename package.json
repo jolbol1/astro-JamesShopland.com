@@ -57,7 +57,7 @@
     "@types/html-escaper": "^3.0.4",
     "@types/lodash.kebabcase": "^4.1.9",
     "@types/mdx": "^2.0.13",
-    "@typescript-eslint/parser": "^8.57.0",
+    "@typescript-eslint/parser": "^8.57.1",
     "eslint": "^10.0.3",
     "eslint-plugin-astro": "^1.6.0",
     "mdast-util-from-markdown": "^2.0.3",
@@ -65,6 +65,6 @@
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
     "reading-time": "^1.5.0",
-    "typescript-eslint": "^8.57.0"
+    "typescript-eslint": "^8.57.1"
   }
 }
