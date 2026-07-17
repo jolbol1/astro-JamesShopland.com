@@ -13,7 +13,7 @@ async function getTimelineData() {
 
 export default async function JustGivingUpdates() {
   const posts = await getTimelineData()
-  const timeline = posts.data.page.timeline.nodes
+  const timeline = posts?.data?.page?.timeline?.nodes ?? []
 
   return (
     <>

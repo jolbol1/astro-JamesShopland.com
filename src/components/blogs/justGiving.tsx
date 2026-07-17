@@ -13,12 +13,24 @@ async function getPageData() {
 
 export default async function JustGiving() {
   const data = await getPageData()
-  const percentage = (
-    data.data.page.donationSummary.totalAmount.value / 1000
-  ).toFixed(2)
-  const value = data.data.page.donationSummary.totalAmount.value / 100
-  const giftAid =
-    data.data.page.donationSummary.totalMatched[0].amount.value / 100
+  const donationSummary = data?.data?.page?.donationSummary
+
+  if (!donationSummary) {
+    return (
+      <a
+        href="https://www.justgiving.com/page/james-shopland"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="focus:ring-primary-300 dark:focus:ring-primary-900 mb-8 mr-3 mt-3 inline-flex w-full items-center justify-center rounded-lg bg-blue-600 px-5 py-3 text-center text-base font-medium text-white hover:bg-blue-800 focus:ring-4"
+      >
+        View on JustGiving
+      </a>
+    )
+  }
+
+  const percentage = (donationSummary.totalAmount.value / 1000).toFixed(2)
+  const value = donationSummary.totalAmount.value / 100
+  const giftAid = donationSummary.totalMatched[0].amount.value / 100
 
   return (
     <>
