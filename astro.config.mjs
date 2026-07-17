@@ -1,12 +1,13 @@
 // @ts-check
 import { defineConfig } from "astro/config"
 
+import { unified } from "@astrojs/markdown-remark"
 import mdx from "@astrojs/mdx"
 import react from "@astrojs/react"
 import sitemap from "@astrojs/sitemap"
-import tailwindcss from "@tailwindcss/vite"
 import vercel from "@astrojs/vercel"
 import remarkEmbedder from "@remark-embedder/core"
+import tailwindcss from "@tailwindcss/vite"
 import expressiveCode from "astro-expressive-code"
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
@@ -19,18 +20,22 @@ import { remarkOembedOptions } from "./src/lib/oembed"
 // https://astro.build/config
 export default defineConfig({
   site: "https://jamesshopland.com",
+  // Preserve Astro 6's HTML-aware whitespace behavior.
+  compressHTML: true,
   image: {
     responsiveStyles: true,
   },
   markdown: {
-    // @ts-expect-error oembed error
-    remarkPlugins: [[remarkEmbedder.default, remarkOembedOptions]],
-    rehypePlugins: [
-      rehypeSlug,
-      // @ts-expect-error rehypeAccessibleEmojis error
-      rehypeAccessibleEmojis,
-      [rehypeAutolinkHeadings, autolinkConfig],
-    ],
+    processor: unified({
+      // @ts-expect-error oembed error
+      remarkPlugins: [[remarkEmbedder.default, remarkOembedOptions]],
+      rehypePlugins: [
+        rehypeSlug,
+        // @ts-expect-error rehypeAccessibleEmojis error
+        rehypeAccessibleEmojis,
+        [rehypeAutolinkHeadings, autolinkConfig],
+      ],
+    }),
   },
   integrations: [
     expressiveCode({
