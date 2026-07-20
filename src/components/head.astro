@@ -32,7 +32,7 @@ const {
 } = Astro.props
 const socialImageURL = articleDate
   ? new URL(`${Astro.url.pathname}og.png`, Astro.url).href
-  : new URL("og.png", Astro.url).href
+  : new URL("/og.png", Astro.url).href
 ---
 
 <!-- Global Metadata -->

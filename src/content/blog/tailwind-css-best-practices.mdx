@@ -92,7 +92,7 @@ module.exports = {
     },
   },
   // Rest of config
-};
+}
 ```
 
 Above you will notice we have extended border radius to allow us to still use the size modifiers, with our custom definition of a base radius.
@@ -113,7 +113,7 @@ First, in your tailwind config file, ensure dark mode is configured using class 
 module.exports = {
   darkMode: ["class"],
   // rest of config
-};
+}
 ```
 
 Next we can go back to our custom variables in our css file to add our dark mode theme.
@@ -163,11 +163,11 @@ npm install clsx tailwind-merge
 Now, we need to add a function. You can place this anywhere you like, most place it in `lib/utils.ts`
 
 ```ts title="lib/utils.ts"
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+  return twMerge(clsx(inputs))
 }
 ```
 
@@ -195,8 +195,8 @@ You may be wondering what the use-case of this is. The best example is when buil
 export const ExampleButton = ({ className }) => {
   return (
     <button class={cn("px-1 py-2 bg-primary rounded-sm", className)}></button>
-  );
-};
+  )
+}
 ```
 
 We can now override the style on the button if needed without worrying about conflicts.
@@ -226,8 +226,8 @@ export const ExampleDiv = ({ className, isError, isWarning, children }) => {
     >
       {children}
     </div>
-  );
-};
+  )
+}
 ```
 
 Now in the above component, we can style based on a prop or state being true. So if `isWarning` is true, it will be yellow and if `isError` is true is will be red.
@@ -245,8 +245,8 @@ export const ExampleDiv = ({ className, isError, isWarning, children }) => {
     >
       {children}
     </div>
-  );
-};
+  )
+}
 ```
 
 Hopefully that explains why the cn helper is so powerful and useful when building out your own custom components.
@@ -303,18 +303,18 @@ const buttonVariants = cva(
       size: "default",
     },
   }
-);
+)
 
 export const Button = ({ className, variant, size }) => {
   return (
     <button class={cn(buttonVariants({ variant, size, className }))}>
       Click Me
     </button>
-  );
-};
+  )
+}
 
 //usage
-<Button variant="outline" size="sm" />;
+;<Button variant="outline" size="sm" />
 ```
 
 The above is a simple variants example. Essentially, the first string of tailwind classes are the defaults, that are applied to every variant.

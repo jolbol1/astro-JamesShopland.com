@@ -1,4 +1,4 @@
-  /** @type {import('prettier').Config} */
+/** @type {import('prettier').Config} */
 export default {
   endOfLine: "lf",
   semi: false,
@@ -37,4 +37,4 @@ export default {
       },
     },
   ],
-};
+}

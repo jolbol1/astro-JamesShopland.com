@@ -90,10 +90,9 @@ Now that you have your template working, how do you utilize this in your email s
 For this we need to make use of the `render` function. The example below is built using nodemailer, in a NextJS API Route.
 
 ```ts title="api/send-mail/route.ts"
-import type { NextApiRequest, NextApiResponse } from "next"
-
 import Email from "@/emails/example-email"
 import { render } from "@react-email/render"
+import type { NextApiRequest, NextApiResponse } from "next"
 
 export default async function handler(
   req: NextApiRequest,

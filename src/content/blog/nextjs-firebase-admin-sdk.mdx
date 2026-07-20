@@ -72,39 +72,39 @@ Now that we have our configuration values, we need to create a function to utili
 Populate the file with the code below, I'll explain the key points:
 
 ```ts title="firebaseAdmin.ts"
-import "server-only";
+import "server-only"
 
-import admin from "firebase-admin";
+import admin from "firebase-admin"
 
 interface FirebaseAdminAppParams {
-  projectId: string;
-  clientEmail: string;
-  storageBucket: string;
-  privateKey: string;
+  projectId: string
+  clientEmail: string
+  storageBucket: string
+  privateKey: string
 }
 
 function formatPrivateKey(key: string) {
-  return key.replace(/\\n/g, "\n");
+  return key.replace(/\\n/g, "\n")
 }
 
 export function createFirebaseAdminApp(params: FirebaseAdminAppParams) {
-  const privateKey = formatPrivateKey(params.privateKey);
+  const privateKey = formatPrivateKey(params.privateKey)
 
   if (admin.apps.length > 0) {
-    return admin.app();
+    return admin.app()
   }
 
   const cert = admin.credential.cert({
     projectId: params.projectId,
     clientEmail: params.clientEmail,
     privateKey,
-  });
+  })
 
   return admin.initializeApp({
     credential: cert,
     projectId: params.projectId,
     storageBucket: params.storageBucket,
-  });
+  })
 }
 
 export async function initAdmin() {
@@ -113,9 +113,9 @@ export async function initAdmin() {
     clientEmail: process.env.FIREBASE_CLIENT_EMAIL as string,
     storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET as string,
     privateKey: process.env.FIREBASE_PRIVATE_KEY as string,
-  };
+  }
 
-  return createFirebaseAdminApp(params);
+  return createFirebaseAdminApp(params)
 }
 ```
 
@@ -130,40 +130,40 @@ To fetch some data from firestore, I am again going to create a new file to hous
 I am going to add some example functions in here to fetch some data I have stored in the database, as well as a public download URL for a file I have stored in storage.
 
 ```ts title="firebase.ts"
-import "server-only";
+import "server-only"
 
-import { getFirestore } from "firebase-admin/firestore";
-import { getDownloadURL, getStorage } from "firebase-admin/storage";
+import { getFirestore } from "firebase-admin/firestore"
+import { getDownloadURL, getStorage } from "firebase-admin/storage"
 
 export const getLinks = async () => {
-  const firestore = getFirestore();
-  const linkSnapshot = await firestore.collection("links").get();
+  const firestore = getFirestore()
+  const linkSnapshot = await firestore.collection("links").get()
   const documents = linkSnapshot.docs.map((link) => ({
     url: link.data().url,
     title: link.data().title,
     desc: link.data().desc,
-  }));
+  }))
 
-  return documents;
-};
+  return documents
+}
 
 export const getLogo = async () => {
-  const firestore = getFirestore();
-  const logoSnapshot = await firestore.collection("images").doc("logo").get();
-  const logoData = logoSnapshot.data() as { url: string } | undefined;
+  const firestore = getFirestore()
+  const logoSnapshot = await firestore.collection("images").doc("logo").get()
+  const logoData = logoSnapshot.data() as { url: string } | undefined
   if (!logoSnapshot.exists || !logoData) {
-    return null;
+    return null
   }
-  return logoData.url;
-};
+  return logoData.url
+}
 
 export const getLogoFromStorage = async () => {
-  const bucket = getStorage().bucket();
-  const file = bucket.file("logo.png");
-  const imageUrl = await getDownloadURL(file);
-  console.log(imageUrl);
-  return imageUrl;
-};
+  const bucket = getStorage().bucket()
+  const file = bucket.file("logo.png")
+  const imageUrl = await getDownloadURL(file)
+  console.log(imageUrl)
+  return imageUrl
+}
 ```
 
 In the function `getLogoFromStorage` its worth noting the `logo.png` is the path to the file in firebases storage. So if you had it nested in a folder it would look something like this `images/logo.png`.
@@ -200,17 +200,17 @@ First create the API route, this will be a folder structure like this `app/api/i
 Next, add the following:
 
 ```ts title="route.ts"
-import { getLogoFromStorage } from "@/db/firebase";
-import { initAdmin } from "@/db/firebaseAdmin";
+import { getLogoFromStorage } from "@/db/firebase"
+import { initAdmin } from "@/db/firebaseAdmin"
 
 export async function GET(request: Request) {
-  await initAdmin();
+  await initAdmin()
 
-  const imageUrl = await getLogoFromStorage();
+  const imageUrl = await getLogoFromStorage()
 
-  const response = await fetch(imageUrl);
+  const response = await fetch(imageUrl)
 
-  return new Response(response.body, { headers: response.headers });
+  return new Response(response.body, { headers: response.headers })
 }
 ```
 

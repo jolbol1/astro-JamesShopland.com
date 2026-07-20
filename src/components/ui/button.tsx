@@ -46,8 +46,7 @@ const buttonVariants = cva(
 )
 
 interface ButtonProps
-  extends AriaButtonProps,
-    VariantProps<typeof buttonVariants> {}
+  extends AriaButtonProps, VariantProps<typeof buttonVariants> {}
 
 const Button = ({ className, variant, size, ...props }: ButtonProps) => {
   return (

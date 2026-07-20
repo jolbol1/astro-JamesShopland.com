@@ -10,14 +10,7 @@ import ChannelCardsIsland from "./channel-cards-island.astro"
   >
     Channels
   </h2>
-  <ChannelCardsIsland
-    server:defer
-    aria-labelledby="channels-heading"
-  >
-    <ChannelCardsFallback
-      slot="fallback"
-      aria-labelledby="channels-heading"
-    />
+  <ChannelCardsIsland server:defer aria-labelledby="channels-heading">
+    <ChannelCardsFallback slot="fallback" aria-labelledby="channels-heading" />
   </ChannelCardsIsland>
-
 </div>

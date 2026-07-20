@@ -15,11 +15,10 @@ https://www.youtube.com/watch?v=Lf8VFt-RVeE
 Today I'll show you a plugin you can use on top of Prettier to have your imports automatically sorted, in a completely configurable way. From this:
 
 ```tsx
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Post } from "@prisma/client"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import TextareaAutosize from "react-textarea-autosize"
 import * as z from "zod"
@@ -42,12 +41,12 @@ To something you have configured, like this:
 
 ```tsx
 import * as React from "react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
 
 import EditorJS from "@editorjs/editorjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Post } from "@prisma/client"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import TextareaAutosize from "react-textarea-autosize"
 import * as z from "zod"

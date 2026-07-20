@@ -3,10 +3,12 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+  --font-sans:
+    Inter, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-mono: JetBrainsMono, ui-monospace, SFMono-Regular, Menlo, Monaco,
-    Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-mono:
+    JetBrainsMono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
 
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
@@ -156,21 +158,28 @@
 
     --radius: 0.5rem;
 
-    --surface-shadow-1: inset 0 0 0 1px var(--gray-a5),
-      inset 0 1.5px 2px 0 var(--gray-a2), inset 0 1.5px 2px 0 var(--black-a2);
-    --surface-shadow-2: 0 0 0 1px var(--gray-a3), 0 0 0 0.5px var(--black-a1),
+    --surface-shadow-1:
+      inset 0 0 0 1px var(--gray-a5), inset 0 1.5px 2px 0 var(--gray-a2),
+      inset 0 1.5px 2px 0 var(--black-a2);
+    --surface-shadow-2:
+      0 0 0 1px var(--gray-a3), 0 0 0 0.5px var(--black-a1),
       0 1px 1px 0 var(--gray-a2), 0 2px 1px -1px var(--black-a1),
       0 1px 3px 0 var(--black-a1);
-    --surface-shadow-3: 0 0 0 1px var(--gray-a3), 0 2px 3px -2px var(--gray-a3),
+    --surface-shadow-3:
+      0 0 0 1px var(--gray-a3), 0 2px 3px -2px var(--gray-a3),
       0 3px 12px -4px var(--black-a2), 0 4px 16px -8px var(--black-a2);
-    --surface-shadow-4: 0 0 0 1px var(--gray-a3), 0 8px 40px var(--black-a1),
+    --surface-shadow-4:
+      0 0 0 1px var(--gray-a3), 0 8px 40px var(--black-a1),
       0 12px 32px -16px var(--gray-a3);
-    --surface-shadow-5: 0 0 0 1px var(--gray-a3), 0 12px 60px var(--black-a3),
+    --surface-shadow-5:
+      0 0 0 1px var(--gray-a3), 0 12px 60px var(--black-a3),
       0 12px 32px -16px var(--gray-a5);
-    --surface-shadow-6: 0 0 0 1px var(--gray-a3), 0 12px 60px var(--black-a3),
+    --surface-shadow-6:
+      0 0 0 1px var(--gray-a3), 0 12px 60px var(--black-a3),
       0 16px 64px var(--gray-a2), 0 16px 36px -20px var(--gray-a7);
 
-    --card-shadow: 0 0 0 1px var(--base-card-classic-hover-border-color),
+    --card-shadow:
+      0 0 0 1px var(--base-card-classic-hover-border-color),
       0 0 1px 1px var(--gray-a4), 0 0 1px -1px var(--gray-a4),
       0 0 3px -2px var(--gray-a3), 0 0 12px -2px var(--gray-a3),
       0 0 16px -8px var(--gray-a7);
@@ -242,22 +251,28 @@
 
     --radius: 0.5rem;
 
-    --surface-shadow-1: inset 0 -1px 1px 0 var(--gray-a3),
-      inset 0 0 0 1px var(--gray-a3), inset 0 3px 4px 0 var(--black-a5),
-      inset 0 0 0 1px var(--gray-a4);
-    --surface-shadow-2: 0 0 0 1px var(--gray-a6), 0 0 0 0.5px var(--black-a3),
+    --surface-shadow-1:
+      inset 0 -1px 1px 0 var(--gray-a3), inset 0 0 0 1px var(--gray-a3),
+      inset 0 3px 4px 0 var(--black-a5), inset 0 0 0 1px var(--gray-a4);
+    --surface-shadow-2:
+      0 0 0 1px var(--gray-a6), 0 0 0 0.5px var(--black-a3),
       0 1px 1px 0 var(--black-a6), 0 2px 1px -1px var(--black-a6),
       0 1px 3px 0 var(--black-a5);
-    --surface-shadow-3: 0 0 0 1px var(--gray-a6), 0 2px 3px -2px var(--black-a3),
+    --surface-shadow-3:
+      0 0 0 1px var(--gray-a6), 0 2px 3px -2px var(--black-a3),
       0 3px 8px -2px var(--black-a6), 0 4px 12px -4px var(--black-a7);
-    --surface-shadow-4: 0 0 0 1px var(--gray-a6), 0 8px 40px var(--black-a3),
+    --surface-shadow-4:
+      0 0 0 1px var(--gray-a6), 0 8px 40px var(--black-a3),
       0 12px 32px -16px var(--black-a5);
-    --surface-shadow-5: 0 0 0 1px var(--gray-a6), 0 12px 60px var(--black-a5),
+    --surface-shadow-5:
+      0 0 0 1px var(--gray-a6), 0 12px 60px var(--black-a5),
       0 12px 32px -16px var(--black-a7);
-    --surface-shadow-6: 0 0 0 1px var(--gray-a6), 0 12px 60px var(--black-a4),
+    --surface-shadow-6:
+      0 0 0 1px var(--gray-a6), 0 12px 60px var(--black-a4),
       0 16px 64px var(--black-a6), 0 16px 36px -20px var(--black-a11);
 
-    --card-shadow: 0 0 0 1px var(--base-card-classic-hover-border-color),
+    --card-shadow:
+      0 0 0 1px var(--base-card-classic-hover-border-color),
       0 0 1px 1px var(--gray-a4), 0 0 1px -1px var(--gray-a4),
       0 0 3px -2px var(--gray-a3), 0 0 12px -2px var(--gray-a3),
       0 0 16px -8px var(--gray-a7);
@@ -414,24 +429,25 @@
 
 @supports (color: color-mix(in oklab, white, black)) {
   :root {
-    --surface-shadow-1: inset 0 0 0 1px var(--gray-a5),
-      inset 0 1.5px 2px 0 var(--gray-a2), inset 0 1.5px 2px 0 var(--black-a2);
-    --surface-shadow-2: 0 0 0 1px
-      color-mix(in oklab, var(--gray-a3), var(--gray-3) 25%),
+    --surface-shadow-1:
+      inset 0 0 0 1px var(--gray-a5), inset 0 1.5px 2px 0 var(--gray-a2),
+      inset 0 1.5px 2px 0 var(--black-a2);
+    --surface-shadow-2:
+      0 0 0 1px color-mix(in oklab, var(--gray-a3), var(--gray-3) 25%),
       0 0 0 0.5px var(--black-a1), 0 1px 1px 0 var(--gray-a2),
       0 2px 1px -1px var(--black-a1), 0 1px 3px 0 var(--black-a1);
-    --surface-shadow-3: 0 0 0 1px
-      color-mix(in oklab, var(--gray-a3), var(--gray-3) 25%),
+    --surface-shadow-3:
+      0 0 0 1px color-mix(in oklab, var(--gray-a3), var(--gray-3) 25%),
       0 2px 3px -2px var(--gray-a3), 0 3px 12px -4px var(--black-a2),
       0 4px 16px -8px var(--black-a2);
-    --surface-shadow-4: 0 0 0 1px
-      color-mix(in oklab, var(--gray-a3), var(--gray-3) 25%),
+    --surface-shadow-4:
+      0 0 0 1px color-mix(in oklab, var(--gray-a3), var(--gray-3) 25%),
       0 8px 40px var(--black-a1), 0 12px 32px -16px var(--gray-a3);
-    --surface-shadow-5: 0 0 0 1px
-      color-mix(in oklab, var(--gray-a3), var(--gray-3) 25%),
+    --surface-shadow-5:
+      0 0 0 1px color-mix(in oklab, var(--gray-a3), var(--gray-3) 25%),
       0 12px 60px var(--black-a3), 0 12px 32px -16px var(--gray-a5);
-    --surface-shadow-6: 0 0 0 1px
-      color-mix(in oklab, var(--gray-a3), var(--gray-3) 25%),
+    --surface-shadow-6:
+      0 0 0 1px color-mix(in oklab, var(--gray-a3), var(--gray-3) 25%),
       0 12px 60px var(--black-a3), 0 16px 64px var(--gray-a2),
       0 16px 36px -20px var(--gray-a7);
     --base-card-surface-box-shadow: 0 0 0 1px
@@ -460,25 +476,25 @@
 
 @supports (color: color-mix(in oklab, white, black)) {
   .dark {
-    --surface-shadow-1: inset 0 -1px 1px 0 var(--gray-a3),
-      inset 0 0 0 1px var(--gray-a3), inset 0 3px 4px 0 var(--black-a5),
-      inset 0 0 0 1px var(--gray-a4);
-    --surface-shadow-2: 0 0 0 1px
-      color-mix(in oklab, var(--gray-a6), var(--gray-6) 25%),
+    --surface-shadow-1:
+      inset 0 -1px 1px 0 var(--gray-a3), inset 0 0 0 1px var(--gray-a3),
+      inset 0 3px 4px 0 var(--black-a5), inset 0 0 0 1px var(--gray-a4);
+    --surface-shadow-2:
+      0 0 0 1px color-mix(in oklab, var(--gray-a6), var(--gray-6) 25%),
       0 0 0 0.5px var(--black-a3), 0 1px 1px 0 var(--black-a6),
       0 2px 1px -1px var(--black-a6), 0 1px 3px 0 var(--black-a5);
-    --surface-shadow-3: 0 0 0 1px
-      color-mix(in oklab, var(--gray-a6), var(--gray-6) 25%),
+    --surface-shadow-3:
+      0 0 0 1px color-mix(in oklab, var(--gray-a6), var(--gray-6) 25%),
       0 2px 3px -2px var(--black-a3), 0 3px 8px -2px var(--black-a6),
       0 4px 12px -4px var(--black-a7);
-    --surface-shadow-4: 0 0 0 1px
-      color-mix(in oklab, var(--gray-a6), var(--gray-6) 25%),
+    --surface-shadow-4:
+      0 0 0 1px color-mix(in oklab, var(--gray-a6), var(--gray-6) 25%),
       0 8px 40px var(--black-a3), 0 12px 32px -16px var(--black-a5);
-    --surface-shadow-5: 0 0 0 1px
-      color-mix(in oklab, var(--gray-a6), var(--gray-6) 25%),
+    --surface-shadow-5:
+      0 0 0 1px color-mix(in oklab, var(--gray-a6), var(--gray-6) 25%),
       0 12px 60px var(--black-a5), 0 12px 32px -16px var(--black-a7);
-    --surface-shadow-6: 0 0 0 1px
-      color-mix(in oklab, var(--gray-a6), var(--gray-6) 25%),
+    --surface-shadow-6:
+      0 0 0 1px color-mix(in oklab, var(--gray-a6), var(--gray-6) 25%),
       0 12px 60px var(--black-a4), 0 16px 64px var(--black-a6),
       0 16px 36px -20px var(--black-a11);
     --base-card-classic-border-color: color-mix(

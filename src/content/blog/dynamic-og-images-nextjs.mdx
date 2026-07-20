@@ -6,8 +6,8 @@ draft: false
 summary: "How to set-up dynamically generated OpenGraph images in NextJS 13, using both the app and pages router. How to style the image with tailwind, add custom fonts, choose emoji style and load in external/local images"
 ---
 
-import { Image } from "astro:assets";
-import ogImage from "@/assets/blog/og-image-blog/example.png";
+import ogImage from "@/assets/blog/og-image-blog/example.png"
+import { Image } from "astro:assets"
 
 Open Graph (OG) images provide visual representations for content when it's shared on social media platforms. It adds extra visual appeal to a posted link, helps with branding and can entice more clicks.
 
@@ -43,9 +43,9 @@ Within this file we are going to import the `ImageResponse` which makes this all
 We are also going to need to tell NextJS that this api route will use the "edge" runtime.
 
 ```tsx title="route.tsx"
-import { ImageResponse } from "next/server";
+import { ImageResponse } from "next/server"
 
-export const runtime = "edge";
+export const runtime = "edge"
 ```
 
 If you are using the pages router, you will need to install and import this from `@vercel/og`.
@@ -59,9 +59,9 @@ To do this we simply need to define an async function called GET, and return a s
 ```tsx title="route.tsx"
 export async function GET() {
   try {
-    return new ImageResponse(<div>Hello World</div>);
+    return new ImageResponse(<div>Hello World</div>)
   } catch (e: any) {
-    return new Response("Failed to generate OG image", { status: 500 });
+    return new Response("Failed to generate OG image", { status: 500 })
   }
 }
 ```
@@ -79,22 +79,20 @@ This example checks for the titles existence, if it isn't provided use a default
 ```tsx title="route.tsx"
 export async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
+    const { searchParams } = new URL(request.url)
 
-    const hasTitle = searchParams.has("title");
+    const hasTitle = searchParams.has("title")
     const title = hasTitle
       ? searchParams.get("title")?.slice(0, 100)
-      : "My website";
+      : "My website"
 
     return new ImageResponse(
-      (
-        <div tw="flex flex-col w-full h-full items-center justify-center bg-white">
-          {title}
-        </div>
-      )
-    );
+      <div tw="flex flex-col w-full h-full items-center justify-center bg-white">
+        {title}
+      </div>
+    )
   } catch (e: any) {
-    return new Response("Failed to generate OG image", { status: 500 });
+    return new Response("Failed to generate OG image", { status: 500 })
   }
 }
 ```
@@ -110,41 +108,39 @@ In order to use tailwind, we don't use `className` as you may be used to. Instea
 ```tsx title="route.tsx"
 export async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
+    const { searchParams } = new URL(request.url)
 
-    const hasTitle = searchParams.has("title");
+    const hasTitle = searchParams.has("title")
     const title = hasTitle
       ? searchParams.get("title")?.slice(0, 100)
-      : "My website";
+      : "My website"
 
     return new ImageResponse(
-      (
-        <div tw="flex flex-col w-full h-full items-center justify-center bg-white">
-          <div tw="bg-gray-50 flex w-full">
-            <div tw="flex flex-col md:flex-row w-full py-12 px-4 md:items-center justify-between p-8">
-              <h2 tw="flex flex-col text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 text-left">
-                <span>Ready to dive in?</span>
-                <span tw="text-indigo-600">{title}</span>
-              </h2>
-              <div tw="mt-8 flex md:mt-0">
-                <div tw="flex rounded-md shadow">
-                  <a tw="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-base font-medium text-white">
-                    Get started
-                  </a>
-                </div>
-                <div tw="ml-3 flex rounded-md shadow">
-                  <a tw="flex items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-indigo-600">
-                    Learn more
-                  </a>
-                </div>
+      <div tw="flex flex-col w-full h-full items-center justify-center bg-white">
+        <div tw="bg-gray-50 flex w-full">
+          <div tw="flex flex-col md:flex-row w-full py-12 px-4 md:items-center justify-between p-8">
+            <h2 tw="flex flex-col text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 text-left">
+              <span>Ready to dive in?</span>
+              <span tw="text-indigo-600">{title}</span>
+            </h2>
+            <div tw="mt-8 flex md:mt-0">
+              <div tw="flex rounded-md shadow">
+                <a tw="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-base font-medium text-white">
+                  Get started
+                </a>
+              </div>
+              <div tw="ml-3 flex rounded-md shadow">
+                <a tw="flex items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-indigo-600">
+                  Learn more
+                </a>
               </div>
             </div>
           </div>
         </div>
-      )
-    );
+      </div>
+    )
   } catch (e: any) {
-    return new Response("Failed to generate OG image", { status: 500 });
+    return new Response("Failed to generate OG image", { status: 500 })
   }
 }
 ```
@@ -162,43 +158,41 @@ With the array buffer, we will want to add it to the ImageResponse configuration
 ```tsx title="route.tsx"
 export async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
+    const { searchParams } = new URL(request.url)
 
-    const hasTitle = searchParams.has("title");
+    const hasTitle = searchParams.has("title")
     const title = hasTitle
       ? searchParams.get("title")?.slice(0, 100)
-      : "My website";
+      : "My website"
 
     const fontData = await fetch(
       new URL("../../../assets/fonts/Inter-Bold.ttf", import.meta.url)
-    ).then((res) => res.arrayBuffer());
+    ).then((res) => res.arrayBuffer())
 
     return new ImageResponse(
-      (
-        <div tw="flex flex-col w-full h-full items-center justify-center bg-white">
-          <div tw="bg-gray-50 flex w-full">
-            <div tw="flex flex-col md:flex-row w-full py-12 px-4 md:items-center justify-between p-8">
-              <img width={64} height={64} src={imageData} />
-              <h2 tw="flex flex-col text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 text-left">
-                <span style={{ fontFamily: "Inter" }}>Ready to dive in?</span>
-                <span tw="text-indigo-600">{title}</span>
-              </h2>
-              <div tw="mt-8 flex md:mt-0">
-                <div tw="flex rounded-md shadow">
-                  <a tw="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-base font-medium text-white">
-                    Get started 👋
-                  </a>
-                </div>
-                <div tw="ml-3 flex rounded-md shadow">
-                  <a tw="flex items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-indigo-600">
-                    Learn more
-                  </a>
-                </div>
+      <div tw="flex flex-col w-full h-full items-center justify-center bg-white">
+        <div tw="bg-gray-50 flex w-full">
+          <div tw="flex flex-col md:flex-row w-full py-12 px-4 md:items-center justify-between p-8">
+            <img width={64} height={64} src={imageData} />
+            <h2 tw="flex flex-col text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 text-left">
+              <span style={{ fontFamily: "Inter" }}>Ready to dive in?</span>
+              <span tw="text-indigo-600">{title}</span>
+            </h2>
+            <div tw="mt-8 flex md:mt-0">
+              <div tw="flex rounded-md shadow">
+                <a tw="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-base font-medium text-white">
+                  Get started 👋
+                </a>
+              </div>
+              <div tw="ml-3 flex rounded-md shadow">
+                <a tw="flex items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-indigo-600">
+                  Learn more
+                </a>
               </div>
             </div>
           </div>
         </div>
-      ),
+      </div>,
       {
         fonts: [
           {
@@ -208,9 +202,9 @@ export async function GET(request: Request) {
           },
         ],
       }
-    );
+    )
   } catch (e: any) {
-    return new Response("Failed to generate OG image", { status: 500 });
+    return new Response("Failed to generate OG image", { status: 500 })
   }
 }
 ```
@@ -245,7 +239,7 @@ Similar to custom fonts, we have to load these by fetching and then getting an a
 ```ts
 const imageData = await fetch(
   new URL("../../../assets/logo-64x64.png", import.meta.url)
-).then((res) => res.arrayBuffer());
+).then((res) => res.arrayBuffer())
 ```
 
 Then to use it, we can simply use a standard html image tag where we want it
@@ -268,20 +262,20 @@ In here, I have a function called `generateMetadata`. You can view the documenta
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
-  const details = await getPostFromParams(params);
+  const details = await getPostFromParams(params)
 
   if (!details || !details.post) {
-    return {};
+    return {}
   }
 
-  const post = details.post;
+  const post = details.post
 
-  const url = siteMetadata.siteUrl;
+  const url = siteMetadata.siteUrl
 
-  const ogUrl = new URL(`${url}/api/og`);
-  ogUrl.searchParams.set("heading", post.title);
-  ogUrl.searchParams.set("type", "Blog Post");
-  ogUrl.searchParams.set("mode", "dark");
+  const ogUrl = new URL(`${url}/api/og`)
+  ogUrl.searchParams.set("heading", post.title)
+  ogUrl.searchParams.set("type", "Blog Post")
+  ogUrl.searchParams.set("mode", "dark")
 
   return {
     // other metadata options...
@@ -305,7 +299,7 @@ export async function generateMetadata({
       description: post.summary,
       images: [ogUrl.toString()],
     },
-  };
+  }
 }
 ```
 

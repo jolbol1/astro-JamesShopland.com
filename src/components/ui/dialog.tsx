@@ -65,7 +65,8 @@ const DialogOverlay = ({
 )
 
 interface DialogContentProps
-  extends Omit<React.ComponentProps<typeof AriaModal>, "children">,
+  extends
+    Omit<React.ComponentProps<typeof AriaModal>, "children">,
     VariantProps<typeof sheetVariants> {
   children?: AriaDialogProps["children"]
   role?: AriaDialogProps["role"]

@@ -2,6 +2,7 @@
 import type { APIRoute } from "astro"
 
 import { getImage } from "astro:assets"
+import { siteConfig } from "site-config"
 
 import favicon from "../assets/favicons/favicon.png"
 
@@ -25,13 +26,19 @@ export const GET: APIRoute = async () => {
   )
 
   const manifest = {
-    name: "Your site title",
-    description: "Your site description",
+    name: siteConfig.title,
+    short_name: siteConfig.author,
+    description: siteConfig.description,
     start_url: "/",
+    scope: "/",
     display: "standalone",
-    id: "some-unique-id",
+    id: "/",
+    background_color: "#ffffff",
+    theme_color: "#0084ff",
     icons,
   }
 
-  return new Response(JSON.stringify(manifest))
+  return new Response(JSON.stringify(manifest), {
+    headers: { "Content-Type": "application/manifest+json" },
+  })
 }

@@ -7,6 +7,7 @@ import {
 import { cn } from "@/lib/utils"
 
 import { Link } from "@/components/ui/link"
+
 import type { Channel } from "./channels"
 
 interface ChannelCardsProps extends AriaGridListProps<Channel> {

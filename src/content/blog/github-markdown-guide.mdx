@@ -7,7 +7,7 @@ summary: "Markdown cheatsheet for all your blogging needs - headers, lists, imag
 ---
 
 ```ts showLineNumbers title="next.config.js" {3} /appDir: true/
-import { withContentlayer } from "next-contentlayer";
+import { withContentlayer } from "next-contentlayer"
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -19,9 +19,9 @@ const nextConfig = {
     appDir: true,
     serverComponentsExternalPackages: ["@prisma/client"],
   },
-};
+}
 
-export default withContentlayer(nextConfig);
+export default withContentlayer(nextConfig)
 ```
 
 Markdown and Mdx parsing is supported via `unified`, and other remark and rehype packages. `next-mdx-remote` allows us to parse `.mdx` and `.md` files in a more flexible manner without touching webpack.
@@ -170,7 +170,7 @@ And here's how it looks - nicely colored with styled code titles!
 ```jsx
 function fancyAlert(arg) {
   if (arg) {
-    $.facebox({ div: "#foo" });
+    $.facebox({ div: "#foo" })
   }
 }
 ```

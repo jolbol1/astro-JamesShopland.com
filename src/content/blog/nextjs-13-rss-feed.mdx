@@ -134,7 +134,7 @@ At the bottom of the RSS feed, add the following:
 ```tsx title="feed.xml/route.ts"
 return new Response(feed.xml(), {
   headers: {
-    'Content-Type': 'application/xml',
+    "Content-Type": "application/xml",
   },
 })
 ```
@@ -149,7 +149,7 @@ Dont worry, this is a good thing, CDATA sections may occur anywhere character da
 </Callout>
 ### Complete feed.xml/route.ts file
 
-Here is the final working route.ts file. This is the file used to generate [my rss feed.](/feed.xml)
+Here is the final working route.ts file. This is the file used to generate [my rss feed.](/rss.xml)
 
 ```tsx title="feed.xml/route.ts"
 import { allBlogs } from "contentlayer/generated"
