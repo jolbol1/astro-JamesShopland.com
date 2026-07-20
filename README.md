@@ -5,7 +5,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![Vercel][vercel-badge]](https://JamesShopland.com)
+[![Cloudflare Workers][cloudflare-badge]](https://JamesShopland.com)
 
 <!-- PROJECT LOGO -->
 <br />
@@ -26,7 +26,8 @@
 
 My personal site hosting my blog posts. Used as a place to learn new frameworks and more, from time to time it may completely change as I try out new things. Currently using Astro, React and TypeScript.
 
-The site is deployed via Vercel.
+The site is deployed to Cloudflare Workers. Pull requests are checked by GitHub
+Actions, and pushes to `master` are deployed automatically after the checks pass.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -63,14 +64,43 @@ To get a local copy up and running follow these simple example steps.
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`                 | Starts local dev server at `localhost:4321`      |
-| `bun build`               | Build your production site to `./dist/`          |
-| `bun preview`             | Preview your build locally, before deploying     |
-| `bun astro ...`           | Run CLI commands like `astro add`, `astro check` |
-| `bun astro --help`        | Get help using the Astro CLI                     |
+| Command            | Action                                           |
+| :----------------- | :----------------------------------------------- |
+| `bun install`      | Installs dependencies                            |
+| `bun dev`          | Starts local dev server at `localhost:4321`      |
+| `bun build`        | Build your production site to `./dist/`          |
+| `bun preview`      | Preview your build locally, before deploying     |
+| `bun deploy`       | Build and deploy with Wrangler                   |
+| `bun astro ...`    | Run CLI commands like `astro add`, `astro check` |
+| `bun astro --help` | Get help using the Astro CLI                     |
+
+### Cloudflare deployment
+
+The Worker is configured in `wrangler.jsonc`. For a first local deployment,
+authenticate and deploy with:
+
+```sh
+bunx wrangler login
+bun deploy
+```
+
+Configure `API_URL` and `API_KEY` as Worker variables/secrets before directing
+production traffic to the Worker. `API_KEY` must be stored as a secret:
+
+```sh
+bunx wrangler secret put API_KEY
+```
+
+For GitHub Actions CI/CD, add these repository secrets under
+**Settings > Secrets and variables > Actions**:
+
+- `CLOUDFLARE_ACCOUNT_ID`
+- `CLOUDFLARE_API_TOKEN` (use a token scoped to edit Workers for this account)
+
+Then add `jamesshopland.com` as a custom domain for the
+`james-shopland-com` Worker in Cloudflare. Once the Worker deployment is
+verified, remove or disable the Vercel deployment integration to avoid two
+providers deploying the same branch.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -101,7 +131,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [tailwind-url]: https://tailwindcss.com/
 [vite-badge]: https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white
 [vite-url]: https://vitejs.dev/
-[vercel-badge]: https://img.shields.io/github/deployments/jolbol1/astro-JamesShopland.com/production?label=Vercel&logo=vercel&style=for-the-badge
+[cloudflare-badge]: https://img.shields.io/badge/Deployed%20on-Cloudflare%20Workers-f38020?style=for-the-badge&logo=cloudflare&logoColor=white
 [astro-badge]: https://img.shields.io/badge/astro-%23f1413d.svg?style=for-the-badge&logo=astro&logoColor=white
 [astro-url]: https://astro.build/
 [react-badge]: https://img.shields.io/badge/react-%2361DAFB.svg?style=for-the-badge&logo=react&logoColor=white

@@ -1,11 +1,11 @@
 // @ts-check
 import { defineConfig } from "astro/config"
 
+import cloudflare from "@astrojs/cloudflare"
 import { unified } from "@astrojs/markdown-remark"
 import mdx from "@astrojs/mdx"
 import react from "@astrojs/react"
 import sitemap from "@astrojs/sitemap"
-import vercel from "@astrojs/vercel"
 import remarkEmbedder from "@remark-embedder/core"
 import tailwindcss from "@tailwindcss/vite"
 import expressiveCode from "astro-expressive-code"
@@ -13,7 +13,6 @@ import { rehypeAccessibleEmojis } from "rehype-accessible-emojis"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeSlug from "rehype-slug"
 
-import { CopyFilesPlugin } from "./sitemap-copy"
 import { autolinkConfig } from "./src/lib/headings"
 import { remarkOembedOptions } from "./src/lib/oembed"
 
@@ -46,23 +45,14 @@ export default defineConfig({
     mdx(),
     react(),
     sitemap(),
-    CopyFilesPlugin(),
   ],
   vite: {
     plugins: [tailwindcss()],
   },
-  adapter: vercel({
-    imageService: true,
-    devImageService: "sharp",
-    imagesConfig: {
-      domains: ["jamesshopland.com"],
-      sizes: [
-        16, 32, 48, 64, 96, 128, 256, 384, 640, 750, 828, 1080, 1200, 1920,
-        2048, 3840,
-      ],
-    },
-    webAnalytics: {
-      enabled: true,
-    },
+  adapter: cloudflare({
+    // The OG image routes read local fonts and images while prerendering.
+    prerenderEnvironment: "node",
+    // All current Astro images are prerendered, so optimize them at build time.
+    imageService: "compile",
   }),
 })
