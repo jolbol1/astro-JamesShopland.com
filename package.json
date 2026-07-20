@@ -70,6 +70,6 @@
     "prettier-plugin-astro": "^0.14.1",
     "reading-time": "^1.5.0",
     "typescript-eslint": "^8.65.0",
-    "wrangler": "4.110.0"
+    "wrangler": "4.112.0"
   }
 }
