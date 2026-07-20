@@ -26,8 +26,8 @@
 
 My personal site hosting my blog posts. Used as a place to learn new frameworks and more, from time to time it may completely change as I try out new things. Currently using Astro, React and TypeScript.
 
-The site is deployed to Cloudflare Workers. Pull requests are checked by GitHub
-Actions, and pushes to `master` are deployed automatically after the checks pass.
+The site is deployed to Cloudflare Workers. GitHub Actions checks pull requests
+and pushes, while Cloudflare Workers Builds deploys pushes to `master`.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -90,12 +90,6 @@ production traffic to the Worker. `API_KEY` must be stored as a secret:
 ```sh
 bunx wrangler secret put API_KEY
 ```
-
-For GitHub Actions CI/CD, add these repository secrets under
-**Settings > Secrets and variables > Actions**:
-
-- `CLOUDFLARE_ACCOUNT_ID`
-- `CLOUDFLARE_API_TOKEN` (use a token scoped to edit Workers for this account)
 
 Then add `jamesshopland.com` as a custom domain for the
 `astro-jamesshopland-com` Worker in Cloudflare. Once the Worker deployment is

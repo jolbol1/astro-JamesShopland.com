@@ -1,4 +1,4 @@
-name: Cloudflare CI/CD
+name: CI
 
 on:
   pull_request:
@@ -11,11 +11,11 @@ permissions:
   contents: read
 
 concurrency:
-  group: cloudflare-${{ github.ref }}
+  group: ci-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  checks:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -35,11 +35,3 @@ jobs:
 
       - name: Build
         run: bun run build
-
-      - name: Deploy to Cloudflare Workers
-        if: github.event_name != 'pull_request'
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy
