@@ -98,7 +98,7 @@ For GitHub Actions CI/CD, add these repository secrets under
 - `CLOUDFLARE_API_TOKEN` (use a token scoped to edit Workers for this account)
 
 Then add `jamesshopland.com` as a custom domain for the
-`james-shopland-com` Worker in Cloudflare. Once the Worker deployment is
+`astro-jamesshopland-com` Worker in Cloudflare. Once the Worker deployment is
 verified, remove or disable the Vercel deployment integration to avoid two
 providers deploying the same branch.
 
