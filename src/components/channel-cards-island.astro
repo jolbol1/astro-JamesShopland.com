@@ -1,4 +1,6 @@
 ---
+import { getSecret } from "astro:env/server"
+
 import { ChannelCards } from "./channel-cards"
 import { channels } from "./channels"
 
@@ -13,8 +15,8 @@ Astro.response.headers.set(
   "s-maxage=86400, stale-while-revalidate"
 )
 
-const apiBaseUrl = import.meta.env.API_URL?.replace(/\/+$/, "")
-const apiKey = import.meta.env.API_KEY ?? ""
+const apiBaseUrl = getSecret("API_URL")?.replace(/\/+$/, "")
+const apiKey = getSecret("API_KEY") ?? ""
 const subscriberCountFormatter = new Intl.NumberFormat("en", {
   notation: "compact",
   maximumFractionDigits: 1,
@@ -70,7 +72,6 @@ const channelsWithLiveCounts = await Promise.all(
     }
   })
 )
-
 ---
 
 <ChannelCards

@@ -84,12 +84,16 @@ bunx wrangler login
 bun deploy
 ```
 
-Configure `API_URL` and `API_KEY` as Worker variables/secrets before directing
-production traffic to the Worker. `API_KEY` must be stored as a secret:
+Configure `API_URL` and `API_KEY` under the deployed Worker's
+**Settings > Variables and Secrets** before directing production traffic to it.
+These must be runtime variables, not Workers Builds variables. Store `API_KEY`
+as an encrypted secret:
 
 ```sh
 bunx wrangler secret put API_KEY
 ```
+
+For local development, define both values in an ignored `.dev.vars` file.
 
 Then add `jamesshopland.com` as a custom domain for the
 `astro-jamesshopland-com` Worker in Cloudflare. Once the Worker deployment is
