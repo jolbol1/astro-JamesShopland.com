@@ -41,7 +41,7 @@
     "html-escaper": "^3.0.3",
     "isbot": "^5.2.1",
     "lodash.kebabcase": "^4.1.1",
-    "lucide-react": "^1.25.0",
+    "lucide-react": "^1.26.0",
     "react": "^19.2.7",
     "react-aria-components": "^1.19.0",
     "react-compiler-runtime": "^1.0.0",
