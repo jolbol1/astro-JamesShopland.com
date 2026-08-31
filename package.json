@@ -39,7 +39,7 @@
     "hast-util-to-string": "^3.0.1",
     "hastscript": "^9.0.1",
     "html-escaper": "^3.0.3",
-    "isbot": "^5.2.1",
+    "isbot": "^5.2.2",
     "lodash.kebabcase": "^4.1.1",
     "lucide-react": "^1.25.0",
     "react": "^19.2.7",
@@ -49,7 +49,7 @@
     "rehype-accessible-emojis": "^0.3.2",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-slug": "^6.0.0",
-    "sharp": "^0.35.3",
+    "sharp": "^0.35.4",
     "sharp-ico": "^0.1.5",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.3",
@@ -70,6 +70,6 @@
     "prettier-plugin-astro": "^0.14.1",
     "reading-time": "^1.5.0",
     "typescript-eslint": "^8.65.0",
-    "wrangler": "4.112.0"
+    "wrangler": "4.127.1"
   }
 }
