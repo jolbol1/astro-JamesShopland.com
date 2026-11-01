@@ -10,8 +10,7 @@ import Layout from "@/layouts/Layout.astro"
 import { Image } from "astro:assets"
 import { siteConfig } from "site-config"
 
-import { Link } from "@/components/ui/link"
-import { Separator } from "@/components/ui/separator"
+import Link from "@/components/ui/link.astro"
 import IconLink from "@/components/icon-link.astro"
 ---
 
@@ -24,7 +23,7 @@ import IconLink from "@/components/icon-link.astro"
         About me
       </h1>
     </div>
-    <Separator client:load />
+    <hr class="h-px w-full border-0 bg-gray-a-6" />
     <div
       class="items-start space-y-2 pt-3 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0"
     >
@@ -111,11 +110,11 @@ import IconLink from "@/components/icon-link.astro"
               >
                 Developer Advocate at&nbsp;{" "}
                 <Link
-                  client:load
                   href="https://jollycod.ing/work"
                   target="_blank"
+                  rel="noopener"
                   variant="link"
-                  className="h-fit p-0 text-lg"
+                  class="h-fit p-0 text-lg"
                 >
                   BetterStack
                 </Link>

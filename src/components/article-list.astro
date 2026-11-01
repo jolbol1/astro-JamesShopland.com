@@ -1,0 +1,44 @@
+---
+import type { Post } from "@/types/types"
+
+import { cn } from "@/lib/utils"
+
+interface Props {
+  posts: Post[]
+  "aria-labelledby"?: string
+}
+
+const { posts, "aria-labelledby": ariaLabelledby } = Astro.props
+---
+
+<ul aria-labelledby={ariaLabelledby} class="-me-2 -ms-2 sm:-me-4 sm:-ms-4">
+  {
+    posts.map((post) => (
+      <li
+        class={cn(
+          "group relative border-b border-gray-a-6 py-6 pl-2 first:pt-4 sm:pl-4",
+          "ring-offset-background transition-colors",
+          /* Hover, and focus anywhere in the row */
+          "hover:bg-gray-a-2 has-[a:focus-visible]:bg-gray-a-2"
+        )}
+      >
+        {/* The link's ::after covers the row, so the whole row is clickable. */}
+        <a
+          href={`/blog/${post.postSlug}/`}
+          class={cn(
+            "text-xl font-bold after:absolute after:inset-0 group-hover:underline focus-visible:underline",
+            /* Focus Visible */
+            "focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-blue-8"
+          )}
+        >
+          {post.data.title}
+        </a>
+        <p class="mt-1 text-sm text-gray-a-11">
+          {post.formattedDate} — {post.readingTime}
+        </p>
+
+        <p class="mt-4">{post.data.summary}</p>
+      </li>
+    ))
+  }
+</ul>

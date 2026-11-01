@@ -11,6 +11,7 @@ export default [
       "**/.github",
       "**/.changeset",
       "**/.vercel",
+      "worker-configuration.d.ts",
     ],
   },
 

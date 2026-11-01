@@ -1,10 +1,10 @@
 import { getCollection } from "astro:content"
-import kebabCase from "lodash.kebabcase"
 
 import type { Post, Tag } from "@/types/types"
 
 import { formatDate } from "./date"
 import { getReadingTime } from "./reading-time"
+import { slugify } from "./slug"
 
 export async function getPosts(
   limit?: number,
@@ -15,14 +15,12 @@ export async function getPosts(
     .filter((post) => (includeDrafts ? true : post.data.draft !== true))
     .filter((post) => {
       if (!tagSlug) return true
-      return post.data.tags?.some(
-        (tag) => kebabCase(tag.toLowerCase()) === tagSlug
-      )
+      return post.data.tags?.some((tag) => slugify(tag) === tagSlug)
     })
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
     .slice(0, limit)
     .map(async (post) => {
-      const postSLug = kebabCase(post.id.toLowerCase())
+      const postSLug = slugify(post.id)
 
       return {
         ...post,
@@ -34,7 +32,7 @@ export async function getPosts(
           : undefined,
         formattedTags: post.data.tags?.map((tag) => ({
           tag: tag.toLowerCase(),
-          slug: kebabCase(tag.toLowerCase()),
+          slug: slugify(tag),
         })),
       }
     })

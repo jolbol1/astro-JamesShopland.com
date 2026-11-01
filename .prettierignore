@@ -9,6 +9,7 @@ coverage
 dist
 node_modules
 .astro
+worker-configuration.d.ts
 .changeset
 .github
 .changeset

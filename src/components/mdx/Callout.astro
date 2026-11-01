@@ -1,0 +1,18 @@
+---
+import { cn } from "@/lib/utils"
+
+interface Props {
+  type?: "danger"
+  [key: string]: unknown
+}
+
+const { type, ...props } = Astro.props
+---
+
+<aside
+  class={cn(
+    "my-6 -me-2 -ms-2 flex items-start border-l-4 border-blue-9 bg-blue-a-3 p-4 sm:-me-4 sm:-ms-4",
+    type === "danger" && "border-[#FF0000] bg-[#FFE9E5] dark:bg-[#3F0F0B]"
+  )}
+  {...props}><div><slot /></div></aside
+>

@@ -1,0 +1,14 @@
+---
+import { cn } from "@/lib/utils"
+
+const { class: classProp, className, ...props } = Astro.props
+---
+
+<p
+  class={cn(
+    "mb-6 text-pretty break-words text-lg leading-7 last:mb-0",
+    classProp,
+    className
+  )}
+  {...props}><slot /></p
+>

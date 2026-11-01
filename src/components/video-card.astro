@@ -1,0 +1,102 @@
+---
+import { formatDate } from "@/lib/date"
+import { cn } from "@/lib/utils"
+import {
+  formatDuration,
+  formatViews,
+  thumbnailUrl,
+  videoUrl,
+  type Video,
+} from "@/lib/videos"
+
+interface Props {
+  video: Video
+}
+
+const { video } = Astro.props
+
+const isShort = video.format === "short"
+// Shorts titles end in a run of hashtags.
+const title = isShort
+  ? video.title.replace(/\s*#\S+/g, "").trim() || video.title
+  : video.title
+const publishedAt = new Date(video.publishedAt)
+---
+
+<li>
+  <a
+    href={videoUrl(video)}
+    target="_blank"
+    rel="noopener"
+    class={cn(
+      "group flex h-full flex-col overflow-hidden rounded-xl border bg-gray-a-2 ring-offset-background transition-shadow hover:shadow-card-classic",
+      /* Focus Visible */
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-8 focus-visible:ring-offset-2"
+    )}
+  >
+    <div
+      class={cn(
+        "relative overflow-hidden bg-gray-a-3",
+        isShort ? "aspect-[9/16]" : "aspect-video"
+      )}
+    >
+      {
+        isShort ? (
+          // Shorts thumbnails are pillarboxed; cropping the 4:3 one to 9:16
+          // leaves just the vertical frame.
+          <img
+            src={thumbnailUrl(video.id, "hq")}
+            alt=""
+            width="480"
+            height="360"
+            loading="lazy"
+            decoding="async"
+            class="size-full object-cover"
+          />
+        ) : (
+          <img
+            src={thumbnailUrl(video.id, "mq")}
+            srcset={`${thumbnailUrl(video.id, "mq")} 320w, ${thumbnailUrl(video.id, "hq")} 480w`}
+            sizes="(min-width: 1024px) 352px, (min-width: 640px) 50vw, 100vw"
+            alt=""
+            width="320"
+            height="180"
+            loading="lazy"
+            decoding="async"
+            class="size-full object-cover"
+          />
+        )
+      }
+      {
+        isShort ? null : (
+          <span class="absolute bottom-2 right-2 rounded bg-black/80 px-1.5 py-0.5 text-xs font-medium text-white">
+            {formatDuration(video.durationSeconds)}
+          </span>
+        )
+      }
+    </div>
+    <div class={cn("flex flex-1 flex-col gap-2", isShort ? "p-3" : "p-4")}>
+      <h3
+        class={cn(
+          "line-clamp-2 font-semibold leading-snug group-hover:underline",
+          isShort && "text-sm"
+        )}
+      >
+        {title}
+      </h3>
+      <p class="mt-auto text-xs text-gray-a-11 sm:text-sm">
+        {formatViews(video.views)}
+        {
+          isShort ? null : (
+            <>
+              {" · "}
+              <time datetime={publishedAt.toISOString()}>
+                {formatDate(publishedAt)}
+              </time>
+            </>
+          )
+        }
+      </p>
+    </div>
+  </a>
+</li>

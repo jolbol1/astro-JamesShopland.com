@@ -1,0 +1,10 @@
+---
+import VideoStatsIsland from "./video-stats-island.astro"
+import VideoStats from "./video-stats.astro"
+---
+
+<div class="mx-auto max-w-6xl px-4 sm:px-8 sm:pt-6 lg:pt-16">
+  <VideoStatsIsland server:defer>
+    <VideoStats slot="fallback" />
+  </VideoStatsIsland>
+</div>

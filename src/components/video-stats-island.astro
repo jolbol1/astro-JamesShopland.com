@@ -1,0 +1,17 @@
+---
+import { formatStat, getVideoStats } from "@/lib/videos"
+
+import VideoStats from "./video-stats.astro"
+
+const stats = await getVideoStats()
+---
+
+{
+  stats ? (
+    <VideoStats
+      views={formatStat(stats.views)}
+      watchHours={formatStat(stats.watchHours)}
+      channelSubscribers={formatStat(stats.channelSubscribers)}
+    />
+  ) : null
+}

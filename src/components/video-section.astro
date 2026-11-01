@@ -1,0 +1,29 @@
+---
+import VideoGridFallback from "./video-grid-fallback.astro"
+import VideosIsland from "./videos-island.astro"
+
+interface Props {
+  limit?: number
+}
+
+const { limit } = Astro.props
+---
+
+<div class="mx-auto mt-12 max-w-6xl px-4 sm:px-8">
+  <VideosIsland server:defer limit={limit}>
+    <div slot="fallback" class="flex flex-col gap-12">
+      <div>
+        <h2 class="mb-4 font-medium uppercase tracking-widest text-blue-11">
+          {limit ? "Latest Videos" : "Videos"}
+        </h2>
+        <VideoGridFallback format="long" count={limit ?? 6} />
+      </div>
+      <div>
+        <h2 class="mb-4 font-medium uppercase tracking-widest text-blue-11">
+          {limit ? "Latest Shorts" : "Shorts"}
+        </h2>
+        <VideoGridFallback format="short" count={6} />
+      </div>
+    </div>
+  </VideosIsland>
+</div>

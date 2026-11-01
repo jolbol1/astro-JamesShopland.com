@@ -8,6 +8,8 @@ export default {
   bracketSpacing: true,
   importOrder: [
     "^(astro/(.*)$)|^(astro$)",
+    // The site has no React, but blog posts' code samples group React
+    // imports, and Prettier formats those samples too.
     "^(react/(.*)$)|^(react$)",
     "",
     "<THIRD_PARTY_MODULES>",
@@ -34,6 +36,14 @@ export default {
       files: ["*.astro"],
       options: {
         parser: "astro",
+      },
+    },
+    {
+      // Whitespace inside these elements ends up in blog posts, so keep the
+      // slot tight to the tags.
+      files: ["src/components/mdx/*.astro"],
+      options: {
+        htmlWhitespaceSensitivity: "strict",
       },
     },
   ],

@@ -9,12 +9,12 @@ import LogoImage from "@/assets/images/logo.webp"
 import { Image } from "astro:assets"
 import { siteConfig } from "site-config"
 
-import { DarkModeButton } from "@/components/dark-mode-button.tsx"
+import DarkModeButton from "@/components/dark-mode-button.astro"
 import GlowDiv from "@/components/glow-div.astro"
 import IconLink from "@/components/icon-link.astro"
 
-import { MobileNav } from "./mobile-nav"
-import { Link } from "./ui/link"
+import MobileNav from "./mobile-nav.astro"
+import Link from "./ui/link.astro"
 ---
 
 <div
@@ -26,9 +26,8 @@ import { Link } from "./ui/link"
         class="flex h-12 shrink grow basis-0 items-center justify-between gap-8"
       >
         <Link
-          className="flex items-center justify-between gap-3 px-0 align-middle data-[hovered]:bg-transparent"
+          class="flex items-center justify-between gap-3 px-0 align-middle hover:bg-transparent"
           href="/"
-          client:load
           variant="ghost"
           aria-label="Home"
         >
@@ -54,32 +53,26 @@ import { Link } from "./ui/link"
         </Link>
         <nav class="relative hidden md:block">
           <ul class="m-0 flex list-none justify-center gap-2 p-0">
-            <Link className="text-base" client:load href="/blog" variant="link">
-              Blog
-            </Link>
-            <!-- <Link
-              className="text-base"
-              client:load
-              variant="link"
-              href="/about"
-            >
-              Videos
-            </Link> -->
-            <Link
-              className="text-base"
-              client:load
-              variant="link"
-              href="/about"
-            >
-              About
-            </Link>
+            {
+              [
+                { href: "/videos", label: "Videos" },
+                { href: "/blog", label: "Blog" },
+                { href: "/about", label: "About" },
+              ].map(({ href, label }) => (
+                <li>
+                  <Link class="text-base" href={href} variant="link">
+                    {label}
+                  </Link>
+                </li>
+              ))
+            }
           </ul>
         </nav>
         <div class="ml-auto flex content-end items-center gap-4 self-stretch">
           <Link
-            client:load
-            className="text-blue-a-11 data-[hovered]:text-blue-a-12"
+            class="text-blue-a-11 hover:text-blue-a-12"
             target="_blank"
+            rel="noopener noreferrer"
             aria-label="GitHub"
             href="https://github.com/jolbol1"
             variant="ghost"
@@ -88,10 +81,10 @@ import { Link } from "./ui/link"
             <Github class="size-6" />
           </Link>
           <GlowDiv>
-            <DarkModeButton client:load />
+            <DarkModeButton />
           </GlowDiv>
           <GlowDiv className="block md:hidden">
-            <MobileNav client:visible>
+            <MobileNav>
               <div slot="socials" class="flex flex-wrap px-2 lg:mb-0">
                 <IconLink href={siteConfig.twitter} label="Twitter">
                   <Twitter class="size-6" />

@@ -1,0 +1,62 @@
+---
+import { cn } from "@/lib/utils"
+
+import type { Channel } from "./channels"
+import { buttonVariants } from "./ui/button-variants"
+
+interface Props {
+  channels: Channel[]
+  "aria-labelledby"?: string
+}
+
+const { channels, "aria-labelledby": ariaLabelledby } = Astro.props
+---
+
+<ul
+  aria-labelledby={ariaLabelledby}
+  class="flex w-full list-none flex-col gap-4 p-0 md:flex-row"
+>
+  {
+    channels.map((channel) => (
+      <li class="w-full sm:max-w-96">
+        <a
+          href={channel.url}
+          target="_blank"
+          rel="noopener"
+          class={cn(
+            "group flex flex-row items-center justify-between rounded-xl border bg-gray-a-2 p-6 ring-offset-background transition-shadow hover:shadow-card-classic",
+            /* Focus Visible */
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-8 focus-visible:ring-offset-2"
+          )}
+        >
+          <div class="flex items-center space-x-4">
+            <span class="relative flex size-10 shrink-0 overflow-hidden rounded-full">
+              <img class="aspect-square size-full" alt="" src={channel.image} />
+            </span>
+            <div>
+              <p class="text-sm font-medium leading-none">{channel.name}</p>
+              <p class="text-sm text-gray-a-11">{channel.id}</p>
+              <div class="mt-1 min-h-4">
+                {channel.subscribers ? (
+                  <p class="text-xs text-gray-a-11">
+                    {channel.subscribers} Subscribers
+                  </p>
+                ) : null}
+              </div>
+            </div>
+          </div>
+          {/* The whole card is the link, so this only looks like a button. */}
+          <span
+            aria-hidden="true"
+            class={cn(
+              buttonVariants({ variant: "secondary" }),
+              "hidden group-hover:bg-blue-a-4 [@media(min-width:400px)]:flex"
+            )}
+          >
+            Subscribe
+          </span>
+        </a>
+      </li>
+    ))
+  }
+</ul>

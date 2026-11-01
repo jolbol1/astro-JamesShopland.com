@@ -1,0 +1,177 @@
+---
+import { cn } from "@/lib/utils"
+
+import { buttonVariants } from "./ui/button-variants"
+import Link from "./ui/link.astro"
+
+const links = [
+  { href: "/videos", label: "Videos" },
+  { href: "/blog", label: "Blog" },
+  { href: "/about", label: "About" },
+]
+---
+
+<div data-mobile-nav>
+  <button
+    type="button"
+    aria-haspopup="dialog"
+    aria-controls="mobile-nav"
+    data-mobile-nav-open
+    class={cn(
+      buttonVariants({ variant: "outline", size: "icon" }),
+      "overflow-hidden bg-blue-surface"
+    )}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="size-5"
+      aria-hidden="true"
+    >
+      <path d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>
+    <span class="sr-only">Toggle Menu</span>
+  </button>
+
+  <!-- A native modal dialog: focus trap, Esc to close and an inert page come
+  from the browser. The inner div fills the panel, so a click whose target is
+  the dialog itself landed on the backdrop. -->
+  <dialog
+    id="mobile-nav"
+    aria-label="Navigation"
+    class="m-0 ml-auto h-dvh max-h-none w-3/4 max-w-none border-0 border-l bg-background p-0 text-inherit shadow-lg sm:max-w-sm"
+  >
+    <div class="relative h-full overflow-y-auto py-6">
+      <h2
+        class="mb-4 bg-background pl-4 text-xl font-medium uppercase tracking-widest text-blue-11"
+      >
+        Navigation
+      </h2>
+      <nav>
+        <ul class="my-2 flex flex-col gap-4 px-4">
+          {
+            links.map(({ href, label }) => (
+              <li>
+                <Link
+                  href={href}
+                  variant="link"
+                  class="h-fit justify-start p-0 text-lg"
+                >
+                  {label}
+                </Link>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <div class="flex justify-center p-4">
+        <hr class="h-px w-full border-0 bg-gray-a-6" />
+      </div>
+      <h2
+        class="bg-background pl-4 text-xl font-medium uppercase tracking-widest text-blue-11"
+      >
+        Follow Me
+      </h2>
+      <slot name="socials" />
+      <button
+        type="button"
+        data-mobile-nav-close
+        class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-8 focus-visible:ring-offset-2"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="size-4"
+          aria-hidden="true"
+        >
+          <path d="M18 6 6 18M6 6l12 12"></path>
+        </svg>
+        <span class="sr-only">Close</span>
+      </button>
+    </div>
+  </dialog>
+</div>
+
+<style>
+  /* Slide in from the right over a fading backdrop. `allow-discrete` keeps
+  the dialog in the top layer until the closing slide has finished. */
+  dialog {
+    translate: 100% 0;
+    transition:
+      translate 300ms ease-in-out,
+      overlay 300ms ease-in-out allow-discrete,
+      display 300ms ease-in-out allow-discrete;
+  }
+
+  dialog[open] {
+    translate: 0 0;
+    transition-duration: 500ms;
+  }
+
+  @starting-style {
+    dialog[open] {
+      translate: 100% 0;
+    }
+  }
+
+  dialog::backdrop {
+    background-color: rgb(0 0 0 / 0);
+    transition:
+      background-color 300ms,
+      overlay 300ms allow-discrete,
+      display 300ms allow-discrete;
+  }
+
+  dialog[open]::backdrop {
+    background-color: rgb(0 0 0 / 0.8);
+  }
+
+  @starting-style {
+    dialog[open]::backdrop {
+      background-color: rgb(0 0 0 / 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    dialog,
+    dialog::backdrop {
+      transition: none;
+    }
+  }
+
+  :global(html:has(#mobile-nav[open])) {
+    overflow: hidden;
+  }
+</style>
+
+<script>
+  for (const nav of document.querySelectorAll("[data-mobile-nav]")) {
+    const dialog = nav.querySelector("dialog")
+    if (!dialog) continue
+
+    nav
+      .querySelector("[data-mobile-nav-open]")
+      ?.addEventListener("click", () => dialog.showModal())
+    nav
+      .querySelector("[data-mobile-nav-close]")
+      ?.addEventListener("click", () => dialog.close())
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close()
+    })
+
+    // The menu button is hidden from the md breakpoint up.
+    matchMedia("(width >= 48rem)").addEventListener("change", (event) => {
+      if (event.matches) dialog.close()
+    })
+  }
+</script>

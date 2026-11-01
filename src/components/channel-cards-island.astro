@@ -1,7 +1,9 @@
 ---
 import { getSecret } from "astro:env/server"
 
-import { ChannelCards } from "./channel-cards"
+import { cached } from "@/lib/kv-cache"
+
+import ChannelCards from "./channel-cards.astro"
 import { channels } from "./channels"
 
 interface Props {
@@ -22,19 +24,14 @@ const subscriberCountFormatter = new Intl.NumberFormat("en", {
   maximumFractionDigits: 1,
 })
 
-async function getSubscriberCount(channelHandle: string) {
-  if (!apiBaseUrl) {
-    console.log("No API base URL")
-    return null
-  }
-
+async function loadSubscriberCount(baseUrl: string, channelHandle: string) {
   const response = await fetch(
-    `${apiBaseUrl}/channels/${encodeURIComponent(channelHandle)}`,
+    `${baseUrl}/channels/${encodeURIComponent(channelHandle)}`,
     {
-      credentials: "include",
       headers: {
         "x-api-key": apiKey,
       },
+      signal: AbortSignal.timeout(5_000),
     }
   )
 
@@ -44,38 +41,43 @@ async function getSubscriberCount(channelHandle: string) {
     )
   }
 
-  const data = await response.json()
-  const subscriberCount =
-    typeof data?.channelStats?.subscriberCount === "number"
-      ? data.channelStats.subscriberCount
-      : Number(data?.channelStats?.subscriberCount)
+  const data = await response.json<{
+    channelStats?: { subscriberCount?: number | string }
+  }>()
+  const subscriberCount = Number(data.channelStats?.subscriberCount)
 
   if (!Number.isFinite(subscriberCount)) {
     throw new Error(`Invalid subscriber count for ${channelHandle}`)
   }
 
-  return subscriberCountFormatter.format(subscriberCount)
+  return subscriberCount
+}
+
+async function getSubscriberCount(channelHandle: string) {
+  if (!apiBaseUrl) {
+    console.log("No API base URL")
+    return null
+  }
+
+  const subscriberCount = await cached({
+    key: `subscribers:v1:${channelHandle}`,
+    load: () => loadSubscriberCount(apiBaseUrl, channelHandle),
+  })
+
+  return subscriberCount === null
+    ? null
+    : subscriberCountFormatter.format(subscriberCount)
 }
 
 const channelsWithLiveCounts = await Promise.all(
-  channels.map(async (channel) => {
-    try {
-      return {
-        ...channel,
-        subscribers:
-          (await getSubscriberCount(channel.id)) ?? channel.subscribers,
-      }
-    } catch (error) {
-      console.error(error)
-
-      return channel
-    }
-  })
+  channels.map(async (channel) => ({
+    ...channel,
+    subscribers: (await getSubscriberCount(channel.id)) ?? channel.subscribers,
+  }))
 )
 ---
 
 <ChannelCards
-  client:load
   aria-labelledby={ariaLabelledby}
   channels={channelsWithLiveCounts}
 />

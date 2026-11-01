@@ -1,19 +1,17 @@
 ---
 import { siteConfig } from "@/../site-config"
-import { SEO } from "astro-seo"
 
 import "../styles/globals.css"
 
-import { join } from "node:path"
-
 import faviconSrc from "@/assets/favicons/favicon.png"
-import faviconSvgSrc from "@/assets/favicons/favicon.svg"
-import { AstroFont } from "astro-font"
-import { getImage } from "astro:assets"
+import faviconSvg from "@/assets/favicons/favicon.svg"
+import { Font, getImage } from "astro:assets"
 
 import type { BaseHeadProps } from "@/types/types"
 
 type Props = BaseHeadProps
+
+const TWITTER_HANDLE = "@jollyshopland"
 
 const appleTouchIcon = await getImage({
   src: faviconSrc,
@@ -21,7 +19,6 @@ const appleTouchIcon = await getImage({
   height: 180,
   format: "png",
 })
-const faviconSvg = await getImage({ src: faviconSvgSrc, format: "svg" })
 
 const {
   title,
@@ -30,6 +27,8 @@ const {
   articleUpdatedDate,
   tags,
 } = Astro.props
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href
 const socialImageURL = articleDate
   ? new URL(`${Astro.url.pathname}og.png`, Astro.url).href
   : new URL("/og.png", Astro.url).href
@@ -40,90 +39,51 @@ const socialImageURL = articleDate
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 
 <!-- SEO -->
-<SEO
-  titleTemplate={`%s | ${siteConfig.title}`}
-  title={title}
-  description={description}
-  openGraph={{
-    basic: {
-      title: title,
-      type: articleDate ? "article" : "website",
-      image: socialImageURL,
-    },
-    optional: {
-      description: description,
-      siteName: siteConfig.title,
-    },
-    image: {
-      url: socialImageURL,
-      type: "image/png",
-      width: 1200,
-      height: 630,
-      alt: title,
-    },
-    ...(articleDate
-      ? {
-          article: {
-            publishedTime: articleDate,
-            modifiedTime: articleUpdatedDate,
-            authors: ["@jollyshopland"],
-            section: "Blog",
-            tags: tags,
-          },
-        }
-      : {}),
-  }}
-  twitter={{
-    card: "summary_large_image",
-    site: "@jollyshopland",
-    creator: "@jollyshopland",
-    title: title,
-    description: description,
-    image: socialImageURL,
-    imageAlt: title,
-  }}
-/>
+<title>{`${title} | ${siteConfig.title}`}</title>
+<link rel="canonical" href={canonicalURL} />
+<meta name="description" content={description} />
+<meta name="robots" content="index, follow" />
+
+<!-- Open Graph -->
+<meta property="og:title" content={title} />
+<meta property="og:type" content={articleDate ? "article" : "website"} />
+<meta property="og:image" content={socialImageURL} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:description" content={description} />
+<meta property="og:site_name" content={siteConfig.title} />
+<meta property="og:image:url" content={socialImageURL} />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={title} />
+{
+  articleDate && (
+    <>
+      <meta property="article:published_time" content={articleDate} />
+      {articleUpdatedDate && (
+        <meta property="article:modified_time" content={articleUpdatedDate} />
+      )}
+      <meta property="article:author" content={TWITTER_HANDLE} />
+      <meta property="article:section" content="Blog" />
+      {tags?.map((tag) => (
+        <meta property="article:tag" content={tag} />
+      ))}
+    </>
+  )
+}
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content={TWITTER_HANDLE} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:image" content={socialImageURL} />
+<meta name="twitter:image:alt" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:creator" content={TWITTER_HANDLE} />
 
 <!-- Fonts -->
-<AstroFont
-  config={[
-    {
-      name: "Inter",
-      src: [
-        {
-          style: "normal",
-          weight: "100 900",
-          path: join(process.cwd(), "public", "fonts", "Inter-Variable.woff2"),
-        },
-      ],
-      preload: true,
-      display: "swap",
-      fallback: "sans-serif",
-    },
-  ]}
-/>
-<AstroFont
-  config={[
-    {
-      name: "JetBrainsMono",
-      src: [
-        {
-          style: "normal",
-          weight: "400",
-          path: join(
-            process.cwd(),
-            "public",
-            "fonts",
-            "JetBrainsMono-Regular.woff2"
-          ),
-        },
-      ],
-      preload: articleDate ? true : false,
-      display: "swap",
-      fallback: "monospace",
-    },
-  ]}
-/>
+<Font cssVariable="--font-inter" preload />
+<Font cssVariable="--font-jetbrains-mono" preload={Boolean(articleDate)} />
 
 <meta name="generator" content={Astro.generator} />
 <link rel="sitemap" href="/sitemap-index.xml" />

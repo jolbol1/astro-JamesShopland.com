@@ -1,0 +1,10 @@
+---
+import { cn } from "@/lib/utils"
+
+const { class: classProp, className, ...props } = Astro.props
+---
+
+<hr
+  class={cn("h-px w-full shrink-0 bg-gray-a-6", classProp, className)}
+  {...props}
+/>

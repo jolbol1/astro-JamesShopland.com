@@ -1,13 +1,15 @@
 ---
 import Layout from "@/layouts/Layout.astro"
 
-import BlogSection from "@/components/blog-section.astro"
 import ChannelSection from "@/components/channel-section.astro"
 import Hero from "@/components/hero.astro"
+import StatsSection from "@/components/stats-section.astro"
+import VideoSection from "@/components/video-section.astro"
 ---
 
 <Layout title="Home">
   <Hero />
-  <BlogSection limit={5} tagsLimit={20} />
+  <StatsSection />
+  <VideoSection limit={6} />
   <ChannelSection />
 </Layout>

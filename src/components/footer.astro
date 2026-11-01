@@ -7,8 +7,18 @@ import Twitter from "@/assets/icons/twitter.svg"
 import YouTube from "@/assets/icons/youtube.svg"
 import { siteConfig } from "site-config"
 
-import { Link } from "@/components/ui/link"
+import Link from "@/components/ui/link.astro"
 import IconWrapper from "@/components/icon-link.astro"
+
+import { channels } from "./channels"
+
+const navigation = [
+  { href: "/", label: "Home" },
+  { href: "/videos", label: "Videos" },
+  { href: "/blog", label: "Blog" },
+  { href: "/about", label: "About" },
+]
+const linkClass = "h-fit w-full justify-start p-0 font-normal"
 ---
 
 <footer class="relative mt-24 w-full max-w-6xl px-4 pb-6 pt-8 sm:px-8">
@@ -45,93 +55,37 @@ import IconWrapper from "@/components/icon-link.astro"
     </div>
     <div class="flex flex-wrap gap-8 sm:gap-16">
       <div>
-        <h2 class="text-lg font-medium uppercase text-blue-9">Categories</h2>
+        <h2 class="text-lg font-medium uppercase text-blue-9">YouTube</h2>
         <ul>
-          <li>
-            <Link
-              className={"h-fit w-full justify-start p-0 font-normal"}
-              variant="link"
-              client:load
-              href="/tags/react"
-            >
-              React
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={"h-fit w-full justify-start p-0 font-normal"}
-              variant="link"
-              client:load
-              href="/tags/css"
-            >
-              css
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={"h-fit w-full justify-start p-0 font-normal"}
-              variant="link"
-              client:load
-              href="/tags/nextjs"
-            >
-              Next.js
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={"h-fit w-full justify-start p-0 font-normal"}
-              variant="link"
-              client:load
-              href="/tags/javascript"
-            >
-              JavaScript
-            </Link>
-          </li>
+          {
+            channels.map((channel) => (
+              <li>
+                <Link
+                  class={linkClass}
+                  variant="link"
+                  href={channel.url}
+                  target="_blank"
+                  rel="noopener"
+                >
+                  {channel.name}
+                </Link>
+              </li>
+            ))
+          }
         </ul>
       </div>
       <div>
         <h2 class="text-lg font-medium uppercase text-blue-9">Navigation</h2>
         <ul>
-          <li>
-            <Link
-              className={"h-fit w-full justify-start p-0 font-normal"}
-              variant="link"
-              client:load
-              href="/"
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={"h-fit w-full justify-start p-0 font-normal"}
-              variant="link"
-              client:load
-              href="/blog"
-            >
-              Blog
-            </Link>
-          </li>
-          <!-- <li>
-            <Link
-              className={"p-0 font-normal w-full justify-start h-fit"}
-              variant="link"
-              client:load
-              href="/videos"
-            >
-              Videos
-            </Link>
-          </li> -->
-          <li>
-            <Link
-              className={"h-fit w-full justify-start p-0 font-normal"}
-              variant="link"
-              client:load
-              href="/about"
-            >
-              About
-            </Link>
-          </li>
+          {
+            navigation.map(({ href, label }) => (
+              <li>
+                <Link class={linkClass} variant="link" href={href}>
+                  {label}
+                </Link>
+              </li>
+            ))
+          }
         </ul>
       </div>
     </div>
@@ -142,11 +96,8 @@ import IconWrapper from "@/components/icon-link.astro"
     <div class="mx-auto w-full px-4 text-center">
       <div class="py-1 text-sm text-gray-a-11">
         Made with ❤️ by
-        <Link
-          client:load
-          variant="link"
-          href="https://www.jamesshopland.com"
-          className="h-fit p-0 text-gray-a-11">James Shopland</Link
+        <Link variant="link" href="/" class="h-fit p-0 text-gray-a-11"
+          >James Shopland</Link
         >
       </div>
     </div>

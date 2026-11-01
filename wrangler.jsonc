@@ -17,6 +17,13 @@
     "binding": "ASSETS",
     "not_found_handling": "404-page",
   },
+  // Caches the YouTube data the server islands read. Wrangler creates the
+  // namespace on the first deploy because no id is set.
+  "kv_namespaces": [
+    {
+      "binding": "CACHE",
+    },
+  ],
   "observability": {
     "enabled": true,
   },

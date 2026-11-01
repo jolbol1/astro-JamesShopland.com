@@ -1,0 +1,71 @@
+---
+import { getVideos } from "@/lib/videos"
+
+import Link from "@/components/ui/link.astro"
+
+import VideoGrid from "./video-grid.astro"
+
+interface Props {
+  /** Show only the newest few of each format, with a link to the rest. */
+  limit?: number
+}
+
+const { limit } = Astro.props as Props
+
+const videos = await getVideos()
+const longVideos = videos?.filter((video) => video.format === "long") ?? []
+const shorts = videos?.filter((video) => video.format === "short") ?? []
+---
+
+{
+  videos?.length ? (
+    <div class="flex flex-col gap-12">
+      <section>
+        <h2
+          id="videos-long-heading"
+          class="mb-4 font-medium uppercase tracking-widest text-blue-11"
+        >
+          {limit ? "Latest Videos" : `Videos (${longVideos.length})`}
+        </h2>
+        <VideoGrid
+          aria-labelledby="videos-long-heading"
+          format="long"
+          videos={longVideos.slice(0, limit)}
+        />
+      </section>
+      {shorts.length ? (
+        <section>
+          <h2
+            id="videos-short-heading"
+            class="mb-4 font-medium uppercase tracking-widest text-blue-11"
+          >
+            {limit ? "Latest Shorts" : `Shorts (${shorts.length})`}
+          </h2>
+          <VideoGrid
+            aria-labelledby="videos-short-heading"
+            format="short"
+            videos={shorts.slice(0, limit)}
+          />
+        </section>
+      ) : null}
+      {limit ? (
+        <Link href="/videos" class="mx-auto w-3/4">
+          View All Videos
+        </Link>
+      ) : null}
+    </div>
+  ) : (
+    <p class="text-gray-a-11">
+      My videos couldn't be loaded right now. You can watch them on{" "}
+      <a
+        class="text-blue-11 underline"
+        href="https://www.youtube.com/@betterstack/videos"
+        target="_blank"
+        rel="noopener"
+      >
+        the Better Stack channel
+      </a>
+      .
+    </p>
+  )
+}

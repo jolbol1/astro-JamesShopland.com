@@ -45,7 +45,7 @@
 
 .astro-code,
 .astro-code span {
-  font-family: "JetBrainsMono" !important;
+  font-family: var(--font-jetbrains-mono) !important;
 }
 
 /* Custom styles for heading anchor links. */

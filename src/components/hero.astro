@@ -1,10 +1,10 @@
 ---
 import BetterStack from "@/assets/icons/better-stack.svg"
 import Youtube from "@/assets/icons/youtube.svg"
-import hero from "@/assets/images/hero-image.webp"
+import hero from "@/assets/images/hero-photo.webp"
 import { Image } from "astro:assets"
 
-import { Link } from "@/components/ui/link"
+import Link from "@/components/ui/link.astro"
 ---
 
 <section class="relative mx-auto max-w-6xl px-8">
@@ -14,7 +14,7 @@ import { Link } from "@/components/ui/link"
     <Image
       src={hero}
       alt={""}
-      quality={50}
+      quality={70}
       class="mx-auto max-h-[380px] w-full max-w-[380px] object-contain lg:max-h-[480px] lg:max-w-[480px]"
       priority={true}
       fetchpriority="high"
@@ -41,25 +41,25 @@ import { Link } from "@/components/ui/link"
       >
         Developer Advocate <span class="flex flex-wrap items-center gap-x-1"
           >at <Link
-            client:load
             href="https://jollycod.ing/work"
             target="_blank"
+            rel="noopener"
             variant="link"
             aria-label="Better Stack"
-            className="p-0 data-[hovered]:text-gray-12"
+            class="p-0 hover:text-gray-12"
           >
             <BetterStack class="ml-[-16px] h-4" />
           </Link></span
         >
       </p>
       <div class="flex w-full justify-center sm:justify-start">
-        <Link client:load href="/blog" className="mr-3"> View my blog </Link>
+        <Link href="/videos" class="mr-3"> Watch my videos </Link>
         <Link
           target="_blank"
-          client:load
+          rel="noopener"
           variant="destructive"
           href="https://www.youtube.com/@jollycoding"
-          className="inline-flex items-center justify-center gap-2"
+          class="inline-flex items-center justify-center gap-2"
         >
           <Youtube aria-hidden class="size-4 fill-current" />
           YouTube

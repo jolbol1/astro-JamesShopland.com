@@ -24,7 +24,7 @@
 
 ## About The Project
 
-My personal site hosting my blog posts. Used as a place to learn new frameworks and more, from time to time it may completely change as I try out new things. Currently using Astro, React and TypeScript.
+My personal site, listing my YouTube videos and hosting my blog posts. Used as a place to learn new frameworks and more, from time to time it may completely change as I try out new things. Currently using Astro and TypeScript, with no client-side framework.
 
 The site is deployed to Cloudflare Workers. GitHub Actions checks pull requests
 and pushes, while Cloudflare Workers Builds deploys pushes to `master`.
@@ -35,7 +35,6 @@ and pushes, while Cloudflare Workers Builds deploys pushes to `master`.
 
 - [![Astro][astro-badge]][astro-url]
 - [![Vite][vite-badge]][vite-url]
-- [![React][react-badge]][react-url]
 - [![Typescript][typescript-badge]][typescript-url]
 - [![Tailwind][tailwind-badge]][tailwind-url]
 
@@ -71,6 +70,7 @@ All commands are run from the root of the project, from a terminal:
 | `bun build`        | Build your production site to `./dist/`          |
 | `bun preview`      | Preview your build locally, before deploying     |
 | `bun deploy`       | Build and deploy with Wrangler                   |
+| `bun cf-typegen`   | Regenerate `worker-configuration.d.ts`           |
 | `bun astro ...`    | Run CLI commands like `astro add`, `astro check` |
 | `bun astro --help` | Get help using the Astro CLI                     |
 
@@ -93,7 +93,25 @@ as an encrypted secret:
 bunx wrangler secret put API_KEY
 ```
 
-For local development, define both values in an ignored `.dev.vars` file.
+The videos come from [youtube-data](https://ytdata.bstack-content.dev), which
+knows which Better Stack videos I host. Sign a dedicated session in with the
+`ytdata` CLI, copy its `token` from `~/.config/ytdata/config.json`, and store it
+as `YTDATA_TOKEN`:
+
+```sh
+ytdata login --url https://ytdata.bstack-content.dev --name jamesshopland.com
+bunx wrangler secret put YTDATA_TOKEN
+```
+
+The session lasts 30 days from its last use, and the daily refresh keeps it
+alive. Revoke it from **Signed-in devices** on the youtube-data site.
+
+For local development, define these values in an ignored `.dev.vars` file.
+
+The videos and subscriber counts are cached in the `CACHE` KV namespace for a
+day. A stale value is served while it refreshes in the background, and the last
+good value stays up if a source fails. Wrangler creates the namespace on the
+first deploy. Run `bun cf-typegen` after changing bindings in `wrangler.jsonc`.
 
 Then add `jamesshopland.com` as a custom domain for the
 `astro-jamesshopland-com` Worker in Cloudflare. Once the Worker deployment is
@@ -132,5 +150,3 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [cloudflare-badge]: https://img.shields.io/badge/Deployed%20on-Cloudflare%20Workers-f38020?style=for-the-badge&logo=cloudflare&logoColor=white
 [astro-badge]: https://img.shields.io/badge/astro-%23f1413d.svg?style=for-the-badge&logo=astro&logoColor=white
 [astro-url]: https://astro.build/
-[react-badge]: https://img.shields.io/badge/react-%2361DAFB.svg?style=for-the-badge&logo=react&logoColor=white
-[react-url]: https://react.dev/

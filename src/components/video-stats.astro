@@ -1,0 +1,31 @@
+---
+interface Props {
+  /** Values are left out while the island loads, keeping its space. */
+  views?: string
+  watchHours?: string
+  channelSubscribers?: string
+}
+
+const { views, watchHours, channelSubscribers } = Astro.props
+
+const stats = [
+  { label: "Views on my videos", value: views },
+  { label: "Hours watched", value: watchHours },
+  { label: "Better Stack subscribers", value: channelSubscribers },
+]
+---
+
+<dl class="grid grid-cols-3 gap-4 border-y py-8 text-center sm:py-10">
+  {
+    stats.map(({ label, value }) => (
+      <div class="flex flex-col-reverse justify-end gap-1">
+        <dt class="text-xs text-gray-a-11 sm:text-sm">{label}</dt>
+        <dd class="text-2xl font-extrabold tracking-tight text-gray-12 sm:text-4xl lg:text-5xl">
+          {value ?? (
+            <span class="inline-block h-[1em] w-16 animate-pulse rounded bg-gray-a-3 align-middle sm:w-24" />
+          )}
+        </dd>
+      </div>
+    ))
+  }
+</dl>
