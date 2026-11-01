@@ -2,6 +2,7 @@
 import { getSecret } from "astro:env/server"
 
 import { cached } from "@/lib/kv-cache"
+import { getVideoStats } from "@/lib/videos"
 
 import ChannelCards from "./channel-cards.astro"
 import { channels } from "./channels"
@@ -69,11 +70,18 @@ async function getSubscriberCount(channelHandle: string) {
     : subscriberCountFormatter.format(subscriberCount)
 }
 
+// Shares the stats strip's cached youtube-data read, so the numbers match.
+const ytdataSubscribers = (await getVideoStats())?.channelSubscribers
+
 const channelsWithLiveCounts = await Promise.all(
-  channels.map(async (channel) => ({
-    ...channel,
-    subscribers: (await getSubscriberCount(channel.id)) ?? channel.subscribers,
-  }))
+  channels.map(async (channel) => {
+    const subscribers =
+      channel.subscribersFromYtdata && ytdataSubscribers != null
+        ? subscriberCountFormatter.format(ytdataSubscribers)
+        : await getSubscriberCount(channel.id)
+
+    return { ...channel, subscribers: subscribers ?? channel.subscribers }
+  })
 )
 ---
 

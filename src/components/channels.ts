@@ -4,6 +4,8 @@ export interface Channel {
   subscribers: string | null
   image: string
   url: string
+  /** Take the count from youtube-data, like the homepage stats strip. */
+  subscribersFromYtdata?: boolean
 }
 
 export const channels: Channel[] = [
@@ -13,6 +15,7 @@ export const channels: Channel[] = [
     id: "@betterstack",
     image: "/betterstack.jpg",
     url: "https://www.youtube.com/@betterstack",
+    subscribersFromYtdata: true,
   },
   {
     name: "Jolly Coding",
