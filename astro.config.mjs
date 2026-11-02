@@ -56,6 +56,8 @@ export default defineConfig({
   compressHTML: true,
   image: {
     responsiveStyles: true,
+    // Resize and re-encode images at build time; see the file for why.
+    service: { entrypoint: "./src/lib/image-service.ts" },
   },
   markdown: {
     processor: unified({
