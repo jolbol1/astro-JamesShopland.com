@@ -54,6 +54,11 @@ export default defineConfig({
   ],
   // Preserve Astro 6's HTML-aware whitespace behavior.
   compressHTML: true,
+  build: {
+    // The one stylesheet is small; inlining it removes a render-blocking
+    // request on first visits.
+    inlineStylesheets: "always",
+  },
   image: {
     responsiveStyles: true,
     // Resize and re-encode images at build time; see the file for why.

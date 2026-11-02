@@ -13,11 +13,6 @@ interface Props {
 
 const { "aria-labelledby": ariaLabelledby } = Astro.props as Props
 
-Astro.response.headers.set(
-  "Cache-Control",
-  "s-maxage=86400, stale-while-revalidate=86400"
-)
-
 const apiBaseUrl = getSecret("API_URL")?.replace(/\/+$/, "")
 const apiKey = getSecret("API_KEY") ?? ""
 const subscriberCountFormatter = new Intl.NumberFormat("en", {
