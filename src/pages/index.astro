@@ -8,6 +8,7 @@ import VideoSection from "@/components/video-section.astro"
 ---
 
 <Layout title="Home">
+  <link slot="head" rel="preconnect" href="https://i.ytimg.com" />
   <Hero />
   <StatsSection />
   <VideoSection limit={6} />

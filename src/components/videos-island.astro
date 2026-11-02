@@ -31,6 +31,7 @@ const shorts = videos?.filter((video) => video.format === "short") ?? []
           aria-labelledby="videos-long-heading"
           format="long"
           videos={longVideos.slice(0, limit)}
+          eagerCount={limit ? 0 : 3}
         />
       </section>
       {shorts.length ? (

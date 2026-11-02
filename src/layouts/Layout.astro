@@ -25,6 +25,7 @@ const { title, description, articleDate, articleUpdatedDate, tags } =
       tags={tags}
     />
     <Theme />
+    <slot name="head" />
   </head>
   <body class="mx-auto flex min-h-screen flex-col items-center">
     <Header />

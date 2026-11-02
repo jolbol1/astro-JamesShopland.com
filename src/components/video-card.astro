@@ -11,9 +11,11 @@ import {
 
 interface Props {
   video: Video
+  /** Load the thumbnail straight away; for cards likely to be the LCP. */
+  eager?: boolean
 }
 
-const { video } = Astro.props
+const { video, eager = false } = Astro.props
 
 const isShort = video.format === "short"
 // Shorts titles end in a run of hashtags.
@@ -61,7 +63,8 @@ const publishedAt = new Date(video.publishedAt)
             alt=""
             width="320"
             height="180"
-            loading="lazy"
+            loading={eager ? "eager" : "lazy"}
+            fetchpriority={eager ? "high" : undefined}
             decoding="async"
             class="size-full object-cover"
           />

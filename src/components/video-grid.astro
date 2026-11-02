@@ -7,10 +7,17 @@ import VideoCard from "./video-card.astro"
 interface Props {
   videos: Video[]
   format: VideoFormat
+  /** How many cards, from the start, load their thumbnails eagerly. */
+  eagerCount?: number
   "aria-labelledby"?: string
 }
 
-const { videos, format, "aria-labelledby": ariaLabelledby } = Astro.props
+const {
+  videos,
+  format,
+  eagerCount = 0,
+  "aria-labelledby": ariaLabelledby,
+} = Astro.props
 ---
 
 <ul
@@ -22,5 +29,9 @@ const { videos, format, "aria-labelledby": ariaLabelledby } = Astro.props
       : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
   )}
 >
-  {videos.map((video) => <VideoCard video={video} />)}
+  {
+    videos.map((video, index) => (
+      <VideoCard video={video} eager={index < eagerCount} />
+    ))
+  }
 </ul>

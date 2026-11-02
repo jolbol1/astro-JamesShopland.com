@@ -103,8 +103,8 @@
     --blue-12: #1d2e5c;
 
     --red-8: #fe8171;
-    --red-9: #ff0000;
-    --red-10: #ff0000;
+    --red-9: #d40000;
+    --red-10: #bf0000;
 
     --blue-a1: #00008002;
     --blue-a2: #0040ff08;
@@ -194,8 +194,9 @@
     --blue-6: #134b8a;
     --blue-7: #1f5ba1;
     --blue-8: #256dc1;
-    --blue-9: #0084ff;
-    --blue-10: #0077f0;
+    /* Darker than Radix's step 9/10 so white button text meets 4.5:1. */
+    --blue-9: #006de0;
+    --blue-10: #0062cc;
     --blue-11: #74b7ff;
     --blue-12: #cae3ff;
 
@@ -207,8 +208,8 @@
     --blue-a6: #1583ff82;
     --blue-a7: #288bfe9b;
     --blue-a8: #2c8effbd;
-    --blue-a9: #0084ff;
-    --blue-a10: #007effef;
+    --blue-a9: #006de0;
+    --blue-a10: #0062cc;
     --blue-a11: #74b7ff;
     --blue-a12: #cae3ff;
 
@@ -400,8 +401,8 @@
       --blue-6: oklch(41.4% 0.1199 255.1);
       --blue-7: oklch(47% 0.1294 255.1);
       --blue-8: oklch(53.4% 0.149 255.1);
-      --blue-9: oklch(62.4% 0.2063 255.1);
-      --blue-10: oklch(58.2% 0.2063 255.1);
+      --blue-9: #006de0;
+      --blue-10: #0062cc;
       --blue-11: oklch(77% 0.141 255.1);
       --blue-12: oklch(90.8% 0.0524 255.1);
 
@@ -413,8 +414,8 @@
       --blue-a6: color(display-p3 0.2157 0.5216 1 / 0.492);
       --blue-a7: color(display-p3 0.2745 0.5569 1 / 0.585);
       --blue-a8: color(display-p3 0.2902 0.5608 1 / 0.715);
-      --blue-a9: color(display-p3 0.2275 0.5216 0.9961 / 0.967);
-      --blue-a10: color(display-p3 0.2118 0.498 0.9961 / 0.904);
+      --blue-a9: #006de0;
+      --blue-a10: #0062cc;
       --blue-a11: color(display-p3 0.5255 0.7294 1 / 0.975);
       --blue-a12: color(display-p3 0.8235 0.898 1 / 0.988);
 
